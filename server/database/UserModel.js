@@ -4,10 +4,8 @@ const Connection = require("./Conenction")
     return new Promise(function(resolve, reject) {
       const { use_name, use_age, use_email, use_telephone, use_password } = body
       Connection.query(`INSERT INTO "user" (use_name, use_age, use_email, use_telephone, use_password) VALUES ($1, $2, $3, $4, $5) RETURNING *`,[use_name, use_age, use_email, use_telephone, use_password], (error, results) => {
-        if (results) {
-          console.log("sdgvbghs")
+        if (results) 
           resolve(`User created: ${results.rows}`)
-        }
         reject(error)
       })
     })
@@ -15,9 +13,9 @@ const Connection = require("./Conenction")
 //$1, $2, 3$, 4$, 5$
   const updateUser= (body) => {
     return new Promise(function(resolve, reject) {
-      const {use_name, use_age, use_email, use_telephone, use_password} = body
+      const {use_name, use_age, use_email, use_telephone} = body
       Connection.query('UPDATE user SET use_name=$1, use_age=$2, use_email=$3, use_telephone=$4, use_password=$5 RETURNING *', 
-      [use_name, use_age, use_email, use_telephone, use_password], (error, results) => {
+      [use_name, use_age, use_email, use_telephone], (error, results) => {
         if (results) 
           resolve(`User updated: ${results.rows[0]}`)
         reject(error)
