@@ -11,15 +11,13 @@ router.post("/", async (req, res) => {
 
     if (!validate)
       return res.status(200).send({ success: false, error: "incorrect username or password" })
-    console.log(validate)
 
-    const usu_id = (await Connection.query("select get_user_id_by_email($1)", [use_email])).rows[0].get_user_id_by_email
-    const user = (await UserModel.getUser(usu_id))
+    const use_id = (await Connection.query("select get_user_id_by_email($1)", [use_email])).rows[0].get_user_id_by_email
+    const user = (await UserModel.getUser(use_id))
 
-    
     AuthService.generateToken(user, res)
 
-    return res.status(200).send({ success: true })
+    return res.status(200).send({ success: true, user })
 
   } catch (error) {
     return res.status(500).send({success: false, error: "an error occurred while processing the request",})
