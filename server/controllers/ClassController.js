@@ -1,11 +1,11 @@
 const router = require("express").Router()
-const CourseModel = require("../database/CourseModel")
+const ClassModel = require("../database/ClassModel")
 
 
 router.post("/register", (req, res) => {
   try {
-      const newCourse = req.body
-      CourseModel.registerCourse(newCourse)
+      const newClass = req.body
+      ClassModel.registerClass(newClass)
       .then(response => {
           res.status(200).send(response);
         })
@@ -18,7 +18,7 @@ router.post("/register", (req, res) => {
 })
 
 router.get("/list", (req, res) => {
-    CourseModel.listCourses()
+    ClassModel.listClass()
     .then(response => {
         res.status(200).send(response);
       })
@@ -27,10 +27,10 @@ router.get("/list", (req, res) => {
       })
 })
 
-router.get("/get/:cou_id", (req, res) => {
+router.get("/get/:cla_id", (req, res) => {
   try {
-    const cou_id = req.params.cou_id
-  CourseModel.getCourse(cou_id)
+    const cla_id = req.params.cla_id
+  ClassModel.getClass(cla_id)
   .then(response => {
       res.status(200).send(response);
     })
@@ -45,8 +45,8 @@ router.get("/get/:cou_id", (req, res) => {
 
 router.put("/update", (req, res) => {
   try {
-    const course = req.body
-    CourseModel.updateCourse(course)
+    const classEdited = req.body
+    ClassModel.updateClass(classEdited)
     .then(response => {
         res.status(200).send(response);
       })
@@ -61,8 +61,8 @@ router.put("/update", (req, res) => {
 
 router.delete("/delete", (req, res) => {
   try {
-    const cou_id = req.body.cou_id
-    CourseModel.deletCourse(cou_id)
+    const cla_id = req.body.cla_id
+    ClassModel.deletClass(cla_id)
     .then(response => {
       res.status(200).send(response);
     })

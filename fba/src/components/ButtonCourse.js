@@ -1,17 +1,17 @@
 import React from "react"
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from "react-native"
 
-export default function ButtonCourse({onPress, name, time, description, nivel}) {
+export default function ButtonCourse({onPress, name, time, description, nivel, course_id}) {
 
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={onPress}>
                 <View style={{flexDirection: "row", justifyContent: "space-between", margin: 10}}>
-                    <Text style={{fontSize: 18, fontWeight: "bold"}}>Nome do Curso</Text>
-                    <Text>Tempo do Curso: 1hr</Text>
+                    <Text style={{fontSize: 18, fontWeight: "bold"}}>{name}</Text>
+                    <Text>Tempo do Curso: {time}hr</Text>
                 </View>
                 <View style={{flexDirection: "row", justifyContent: "space-between", margin: 10}}>
-                    <Text>Alguma info que nao sei ainda</Text>
+                    <Text>{description}</Text>
                     <Text style={{fontWeight: "bold"}}>Básico</Text>
                 </View>
             </TouchableOpacity>

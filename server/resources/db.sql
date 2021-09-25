@@ -22,7 +22,7 @@ CREATE TABLE course(
     cou_id SERIAL PRIMARY KEY,
     cou_name VARCHAR(255) NOT NULL,
     cou_duration VARCHAR(30) NOT NULL,
-    cou_description VARCHAR(500) NOT NULL,
+    cou_description VARCHAR(500) NOT NULL
 );
 
 INSERT INTO "course"(
@@ -35,7 +35,8 @@ CREATE TABLE "class"(
     cla_duration VARCHAR(30) NOT NULL,
     cla_description VARCHAR(500) NOT NULL,
     fk_cou_id INT NOT NULL,
-    FOREIGN KEY (fk_cou_id) REFERENCES course(cou_id)
+    FOREIGN KEY (fk_cou_id) REFERENCES course(cou_id) ON DELETE CASCADE
+
 );
 
 INSERT INTO class(
