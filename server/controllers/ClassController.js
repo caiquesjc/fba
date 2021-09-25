@@ -18,13 +18,17 @@ router.post("/register", (req, res) => {
 })
 
 router.get("/list", (req, res) => {
-    ClassModel.listClass()
+    try {
+      ClassModel.listClass()
     .then(response => {
         res.status(200).send(response);
       })
       .catch(error => {
         res.status(500).send(error);
       })
+    } catch (error) {
+      res.send({sucess: false, error: "an error occurred during processing"})
+  }
 })
 
 router.get("/get/:cla_id", (req, res) => {
@@ -74,5 +78,20 @@ router.delete("/delete", (req, res) => {
 }
 })
 
+
+router.get("/class-by-course/:cou_id", (req, res) => {
+  try {
+    const cou_id = req.params.cou_id
+    ClassModel.classByCourseId(cou_id)
+  .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+  } catch (error) {
+    res.send({sucess: false, error: "an error occurred during processing"})
+}
+})
 
 module.exports = router

@@ -1,14 +1,17 @@
 import React from "react"
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from "react-native"
 
-export default function ButtonClass(props) {
+export default function ButtonClass({classInf, navigation}) {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => navigation.navigate("Class", {classInf})}
+                //onPress={() => console.log(classInf.cla_name)}
+            >
                 <View style={{flexDirection: "row", justifyContent: "space-between", margin: 10}}>
-                    <Text style={{fontSize: 18, fontWeight: "bold"}}>Nome da aula</Text>
-                    <Text>Tempo do Curso: 1hr</Text>
+                    <Text style={{fontSize: 18, fontWeight: "bold"}}>{classInf.cla_name}</Text>
+                    <Text>Tempo da Aula: {classInf.cla_duration}hr</Text>
                 </View>
                 <View style={{flexDirection: "row", justifyContent: "space-between", margin: 10}}>
                     <Text>Alguma info que nao sei ainda</Text>

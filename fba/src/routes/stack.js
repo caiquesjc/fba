@@ -3,11 +3,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from '@react-navigation/native';
 
 
-import Home from "../screens/Home";
-import Login from "../screens/Login";
+
 import MyTabs from "./tab";
 
 import VideoCustom from "../components/Video"
+import CoursePresentation from "../screens/CoursePresentation";
+import Class from "../screens/Class";
 
 
 const Stack = createStackNavigator();
@@ -23,6 +24,18 @@ export default function StackCustom(props) {
           options={{ headerShown: false }}
           name="Video"
           component={VideoCustom}
+        />
+
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="CoursePresentation"
+          component={CoursePresentation}
+        />
+
+      <Stack.Screen
+          options={{ headerShown: false }}
+          name="Class"
+          component={Class}
         />
           
       </Stack.Group>

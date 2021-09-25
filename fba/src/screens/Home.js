@@ -15,20 +15,29 @@ export default function Home({ navigation }) {
     const [data, setData ] = useState()
     const categories = [{name: "Categoria 1"},{name: "Categoria 2"},{name: "Categoria 3"}]
 
+    const [refresh, setRefresh] = useState(false)
+
     function getCourses() {
-        return(
-            useEffect(() => {
-                api.get("/courses/list")
+        return (
+            api.get("/course/list")
                 .then((res) => {
                     setData(res.data.data);
                     setLoading(false);
-                    console.log(res.data.data)
+                    setRefresh(false)
                 })
-            },[])
         )
     }
 
-    getCourses()
+
+    function handleRefresh() {
+        setData([])
+        setRefresh(true)
+        getCourses()
+    }
+
+    useEffect(() => {
+        getCourses()
+        },[])
 
 
     if(loading)
@@ -51,10 +60,10 @@ export default function Home({ navigation }) {
                     renderItem={({ item }) => (
                         <ButtonCategories
                             title={item.name}
+                            navigation={navigation}
                         />
                     )}
                     keyExtractor={(item, index) => index.toString()}
-                    showsVerticalScrollIndicator={false}
                 />
 
             </View>
@@ -72,15 +81,14 @@ export default function Home({ navigation }) {
 
                 <FlatList
                 //contentContainerStyle={styles.flat}
+                    onRefresh={() => handleRefresh()}
+                    refreshing={refresh}
                     data={data}
-
+                    extraData={data}
                     renderItem={({ item }) => (
                         <ButtonCourse
-                            name={item.cou_name}
-                            description={item.cou_description}
-                            time={item.cou_duration}
-                            course_id={item.cou_id}
-                            navi ={navigation}
+                            courseInf={item}
+                            navigation={navigation}
                         />
                     )}
                     keyExtractor={(item, index) => index.toString()}

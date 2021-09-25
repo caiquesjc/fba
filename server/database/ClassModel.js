@@ -60,11 +60,22 @@ const registerClass = (body) => {
     })
   }
 
+  const classByCourseId = (id) => {
+    return new Promise(function(resolve, reject) {
+      Connection.query(`SELECT * FROM "class" WHERE fk_cou_id=${id}`, (error, results) => {
+        if (results)
+          resolve({sucess: true, data: results.rows})
+        reject({sucess: false, error: error})
+      })
+    })
+  }
+
 
   module.exports = {
       listClass,
       registerClass,
       getClass,
       updateClass,
-      deletClass
+      deletClass,
+      classByCourseId
   }

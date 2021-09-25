@@ -1,11 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-export default function ButtonCategories({ title, active, onPress }) {
+export default function ButtonCategories({ title, active, onPress, navigation }) {
   return (
     <TouchableOpacity
       style={[styles.container, active && styles.clicked]}
-      onPress={onPress}
+      onPress={() => navigation.navigate("Class")}
     >
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>

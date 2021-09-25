@@ -14,10 +14,15 @@ export default function VideoCustom() {
 
   return (
   
-    <ScrollView style={styles.container}>
-        <View style={styles.contentContainer}>
         <VideoPlayer
+        
         videoProps={{
+          style: {
+            videoBackgroundColor: 'black',
+            height: inFullscreen2 ? Dimensions.get('screen').width : 250,
+            width: inFullscreen2 ? Dimensions.get('screen').height : 400,
+            flex: 1
+          },
           shouldPlay: false,
           resizeMode: Video.RESIZE_MODE_CONTAIN,
           source: {
@@ -43,12 +48,12 @@ export default function VideoCustom() {
         }}
         style={{
           videoBackgroundColor: 'black',
-          height: inFullscreen2 ? Dimensions.get('screen').width : Dimensions.get("window").height * 0.3,
+          height: inFullscreen2 ? Dimensions.get('screen').width : 250,
           width: inFullscreen2 ? Dimensions.get('screen').height : 400,
+          flex: 1
         }}
       />
-        </View>
-    </ScrollView>
+
   )
 }
 

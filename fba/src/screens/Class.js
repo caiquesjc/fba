@@ -7,9 +7,11 @@ import VideoCustom from "../components/Video"
 import ButtonClass from "../components/ButtonClass"
 
 
-export default function Class({ navigation }) {
+export default function Class({ route, navigation }) {
     let [sizeDescription, setSizeDescription] = useState(80)
     let [txtBtnDesc, setTxtBtnDesc] = useState("Ver mais")
+
+    const { classInf } = route.params
     return (
         <View style={styles.container}>
             <View style={styles.video}> 
@@ -17,9 +19,11 @@ export default function Class({ navigation }) {
             </View>
 
             <ScrollView style={{backgroundColor: "#212121", width: "90%"}}>
-            <Text style={{fontSize: 24, padding: 10, color: "#aaa"}}>Título</Text>
+            <Text style={{fontSize: 24, padding: 10, color: "#aaa"}}>{classInf.cla_name}</Text>
             <View style={{height: sizeDescription,backgroundColor: "#212121"}}>
-                <Text style={{textAlign: "justify", fontSize: 16, padding: 5, marginBottom: 10, color: "#aaa"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non arcu nunc. Maecenas cursus enim sit amet ex consectetur imperdiet. In sit amet urna auctor, auctor leo sit amet, venenatis diam. Suspendisse placerat eros nibh. Quisque tempus, lectus in rhoncus rutrum, arcu libero suscipit dolor, non molestie enim erat in felis. Curabitur ullamcorper mattis placerat. Ut dapibus, leo ut cursus facilisis, neque augue mollis nibh, at euismod nulla eros vitae nibh. Proin a tortor a nulla lacinia mattis at eu eros. Pellentesque non sem eget magna elementum hendrerit eget eget ex. Nulla sit amet velit molestie, tristique tortor viverra, laoreet massa. Quisque cursus, mauris id finibus volutpat, est mauris auctor velit, a tempus dolor massa ac urna. Quisque non venenatis purus. In ornare purus faucibus dapibus fermentum. Vivamus dolor quam, consequat non viverra ac, venenatis sit amet libero.</Text>
+                <Text style={{textAlign: "justify", fontSize: 16, padding: 5, marginBottom: 10, color: "#aaa"}}>
+                    {classInf.cla_description}
+                </Text>
             </View>
             <View style={{justifyContent: "flex-end", flexDirection: "row", alignItems: "flex-end", backgroundColor: "#212121"}}>
             
@@ -38,7 +42,7 @@ export default function Class({ navigation }) {
 
 
             <View style={{backgroundColor: "#212121", width: "90%", height: 90, paddingBottom: 10}}>
-                <ButtonClass/>
+                <ButtonClass classInf={classInf}/>
             </View>
         </View>
     )
@@ -52,10 +56,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#212121"
     },
     video: {
-        width: Dimensions.get("window").width * 0.9,
-        height: Dimensions.get("window").height * 0.3,
-        margin: 10,
-        backgroundColor: "cyan"
+        width: 400,
+        height: 250
     },
     backgroundVideo: {
         height: "auto"
