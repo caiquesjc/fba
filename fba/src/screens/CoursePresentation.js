@@ -14,27 +14,27 @@ export default function CoursePresentation({ navigation }) {
                 <VideoCustom/>
             </View>
 
-            <ScrollView style={{backgroundColor: "pink", width: "90%"}}>
-            <Text style={{fontSize: 24, padding: 10}}>Título</Text>
-            <View style={{height: sizeDescription,backgroundColor: "pink"}}>
-                <Text style={{textAlign: "justify", fontSize: 16, padding: 5, marginBottom: 10}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non arcu nunc. Maecenas cursus enim sit amet ex consectetur imperdiet. In sit amet urna auctor, auctor leo sit amet, venenatis diam. Suspendisse placerat eros nibh. Quisque tempus, lectus in rhoncus rutrum, arcu libero suscipit dolor, non molestie enim erat in felis. Curabitur ullamcorper mattis placerat. Ut dapibus, leo ut cursus facilisis, neque augue mollis nibh, at euismod nulla eros vitae nibh. Proin a tortor a nulla lacinia mattis at eu eros. Pellentesque non sem eget magna elementum hendrerit eget eget ex. Nulla sit amet velit molestie, tristique tortor viverra, laoreet massa. Quisque cursus, mauris id finibus volutpat, est mauris auctor velit, a tempus dolor massa ac urna. Quisque non venenatis purus. In ornare purus faucibus dapibus fermentum. Vivamus dolor quam, consequat non viverra ac, venenatis sit amet libero.</Text>
+            <ScrollView style={{backgroundColor: "#212121", width: "90%"}}>
+            <Text style={{fontSize: 24, padding: 10, color: "#aaa"}}>Título</Text>
+            <View style={{height: sizeDescription,backgroundColor: "#212121"}}>
+                <Text style={{textAlign: "justify", fontSize: 16, padding: 5, marginBottom: 10, color: "#aaa"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non arcu nunc. Maecenas cursus enim sit amet ex consectetur imperdiet. In sit amet urna auctor, auctor leo sit amet, venenatis diam. Suspendisse placerat eros nibh. Quisque tempus, lectus in rhoncus rutrum, arcu libero suscipit dolor, non molestie enim erat in felis. Curabitur ullamcorper mattis placerat. Ut dapibus, leo ut cursus facilisis, neque augue mollis nibh, at euismod nulla eros vitae nibh. Proin a tortor a nulla lacinia mattis at eu eros. Pellentesque non sem eget magna elementum hendrerit eget eget ex. Nulla sit amet velit molestie, tristique tortor viverra, laoreet massa. Quisque cursus, mauris id finibus volutpat, est mauris auctor velit, a tempus dolor massa ac urna. Quisque non venenatis purus. In ornare purus faucibus dapibus fermentum. Vivamus dolor quam, consequat non viverra ac, venenatis sit amet libero.</Text>
             </View>
-            <View style={{justifyContent: "flex-end", flexDirection: "row", alignItems: "flex-end", backgroundColor: "#fff"}}>
             
-            <TouchableOpacity onPress={() => {
-                //bug tem que clicar no ver mais duas vezes
+            <View style={{justifyContent: "flex-end", flexDirection: "row", alignItems: "flex-end", backgroundColor: "#212121"}}>
+            
+            <TouchableOpacity 
+                onPress={() => {
                 sizeDescription == 80 ? setSizeDescription("auto") : setSizeDescription(80)
                 txtBtnDesc == "Ver mais" ? setTxtBtnDesc("Ver menos") : setTxtBtnDesc("Ver mais")
                 
                 }}>
-                <Text>{txtBtnDesc}</Text>
+                <Text style={{color: "#aaa", marginTop: 5}}>{txtBtnDesc}</Text>
             </TouchableOpacity>
             </View>
             </ScrollView>
             
-
-            <ScrollView style={{backgroundColor: "pink", width: "90%"}}>
-                <Text>Aulas</Text>
+            <ScrollView style={{backgroundColor: "#212121", width: "90%"}}>
+                <Text style={{fontSize: 24, padding: 10, color: "#aaa"}}>Aulas</Text>
             <View>
               <ButtonClass onPress={() => Alert.alert("caique")}/> 
               <ButtonClass/> 
@@ -51,7 +51,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
+        paddingBottom: 10,
+        backgroundColor: "#212121"
     },
     video: {
         width: Dimensions.get("window").width * 0.9,

@@ -1,12 +1,17 @@
 import React from "react"
 import { Text, View, StyleSheet, ScrollView, SafeAreaView, Alert } from "react-native"
 
+import Loading from "../components/Loading"
+
 import ButtonCategories from "../components/ButtonCategories"
 import ButtonCourse from "../components/ButtonCourse"
 
 
 
 export default function Home() {
+    const loading = true
+    if(!loading)
+    return <Loading/>
     return ( 
         <SafeAreaView style={styles.container}>
         <View style={styles.container}>
@@ -40,6 +45,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "space-between",
-        backgroundColor: "#212121"
+        backgroundColor: "#212121",
+        paddingBottom: 10
     }
 })

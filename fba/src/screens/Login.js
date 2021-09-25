@@ -52,25 +52,26 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#aaa",
+    backgroundColor: "#212121",
     alignItems: "center",
     justifyContent: "center",
     width: "100%"
   },
   text: {
-    color: "#000",
+    color: "#aaa",
     fontWeight: "bold"
   },
   input: {
     width: "70%",
-    color: "#fff",
+    color: "#212121",
     borderWidth: 1,
     marginTop: 20,
-    borderColor: "#212121",
+    borderColor: "#aaa",
     borderRadius: 20,
     padding: 10,
     textAlign: "center",
-    fontSize: 18
+    fontSize: 18,
+    backgroundColor: "#aaa"
   },
   buttonPassCont: {
     width: "70%",
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderWidth: 1,
-    borderColor: "#212121",
+    borderColor: "#aaa",
     width: "50%",
     padding: 10,
     marginTop: 20,

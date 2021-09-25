@@ -21,7 +21,7 @@ export default function TestVideo() {
         defaultControlsVisible="true"
         timeVisible={true}
         slider={true}
-        shouldPlay={true}
+        shouldPlay={false}
         style={{width: widthVideo, height: heightVideo, }}
         fullscreen={{
             inFullscreen: inFullscreen2,
