@@ -15,9 +15,7 @@ router.post("/", async (req, res) => {
     const use_id = (await Connection.query("select get_user_id_by_email($1)", [use_email])).rows[0].get_user_id_by_email
     const user = (await UserModel.getUser(use_id))
 
-    AuthService.generateToken(user, res)
-
-    return res.status(200).send({ success: true, user })
+    return res.status(200).send({ success: true, user, token: AuthService.generateToken(user, res) })
 
   } catch (error) {
     return res.status(500).send({success: false, error: "an error occurred while processing the request",})
@@ -25,3 +23,5 @@ router.post("/", async (req, res) => {
 });
 
 module.exports = router;
+
+

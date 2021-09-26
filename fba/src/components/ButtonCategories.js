@@ -5,7 +5,6 @@ export default function ButtonCategories({ title, active, onPress, navigation })
   return (
     <TouchableOpacity
       style={[styles.container, active && styles.clicked]}
-      onPress={() => navigation.navigate("Class")}
     >
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>

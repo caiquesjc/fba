@@ -2,9 +2,12 @@ import React from "react";
 
 import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from "react-native"
 
+import { useAuth } from "../contexts/auth";
+
 const minhaFoto = "https://avatars.githubusercontent.com/u/54915913?v=4"
 
 export default function Profile() {
+    const [state, setState] = useAuth()
     return (
         <View style={styles.conatiner}>
             <View style={styles.containerImage}>
@@ -20,7 +23,7 @@ export default function Profile() {
             </View>
 
             <View style={styles.containerLogout}>
-                <TouchableOpacity style={styles.buttonLogout}>
+                <TouchableOpacity style={styles.buttonLogout} onPress={() => setState(false)}>
                     <Text style={{color: "#212121", fontSize: 24}}>Sair</Text>
                 </TouchableOpacity>
             </View>

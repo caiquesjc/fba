@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -8,9 +8,39 @@ import {
   SafeAreaView,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 
+import { Icon } from "react-native-elements"
+
+import { useAuth } from "../contexts/auth"
+import api from "../services/api";
+
 export default function Login() {
+  const [use_email, setUse_email] = useState("")
+  const [use_password, setUse_password] = useState("") 
+  const [state, setState] = useAuth()
+  const [passVisible, setPassVisible] = useState(true)
+  const [passIcon, setPassIcon] = useState("visibility-off")
+
+  function handleSignIn() {
+    const user = {
+      use_email,
+      use_password
+    }
+    api.post("/login", user)
+    .then(res => {
+      if(!res.data.success)
+        Alert.alert("Email ou senha incorretos!")
+      setState(res.data)
+    })
+    .catch(err => console.log(err))
+  }
+
+  function showPass() {
+    passVisible ? setPassVisible(false) : setPassVisible(true)
+    passIcon == "visibility-off" ? setPassIcon("visibility") : setPassIcon("visibility-off")
+  }
   return (
     <SafeAreaView style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -23,24 +53,35 @@ export default function Login() {
             placeholder="e-mail"
             textContentType="emailAddress"
             autoCompleteType="email"
+            value={use_email}
+            onChangeText={text => setUse_email(text)}
           />
           <TextInput
             style={styles.input}
             placeholder="senha"
             textContentType="password"
             autoCompleteType="password"
-            secureTextEntry={true}     
+            secureTextEntry={passVisible}
+            value={use_password}
+            onChangeText={text => setUse_password(text)} 
           />
           <View style={styles.buttonPassCont}>
-          <TouchableOpacity style={styles.buttonPass} activeOpacity={0.9}>
-              <Text style={styles.text}>Mostrar senha</Text>
+          <TouchableOpacity 
+            style={styles.buttonPass} 
+            activeOpacity={0.9}
+            onPress={() => {showPass()}}
+          >
+              {/*<Text style={styles.text}>
+                Mostrar senha
+            </Text>*/}
+              <Icon name={passIcon} type="material" color="#aaa"/>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonPass} activeOpacity={0.9}>
               <Text style={styles.text}>Esqueci a senha</Text>
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={styles.button} activeOpacity={0.4}>
+          <TouchableOpacity style={styles.button} activeOpacity={0.4} onPress={() => handleSignIn()}>
             <Text style={styles.text}>Login</Text>
           </TouchableOpacity>
         </View>
@@ -91,5 +132,5 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderRadius: 20,
     alignItems: "center",
-  },
+  }
 });
