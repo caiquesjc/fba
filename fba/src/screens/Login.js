@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -10,6 +10,7 @@ import {
   Keyboard,
   Alert,
 } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Icon } from "react-native-elements"
 
@@ -23,6 +24,28 @@ export default function Login() {
   const [passVisible, setPassVisible] = useState(true)
   const [passIcon, setPassIcon] = useState("visibility-off")
 
+  const storeDataLocal = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem('@auth', jsonValue)
+    } catch (e) {
+      // saving error
+    }
+  }
+
+  
+const getDataLocal = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('@auth')
+      console.log(jsonValue)
+      return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch(e) {
+      // error reading value
+    }
+  }
+
+
+
   function handleSignIn() {
     const user = {
       use_email,
@@ -33,6 +56,7 @@ export default function Login() {
       if(!res.data.success)
         Alert.alert("Email ou senha incorretos!")
       setState(res.data)
+      storeDataLocal(state)
     })
     .catch(err => console.log(err))
   }
@@ -41,6 +65,14 @@ export default function Login() {
     passVisible ? setPassVisible(false) : setPassVisible(true)
     passIcon == "visibility-off" ? setPassIcon("visibility") : setPassIcon("visibility-off")
   }
+
+  useEffect(() => {
+    () => {
+      if(getDataLocal() != null)
+      setState(getDataLocal())
+    }
+  })
+
   return (
     <SafeAreaView style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -54,7 +86,7 @@ export default function Login() {
             textContentType="emailAddress"
             autoCompleteType="email"
             value={use_email}
-            onChangeText={text => setUse_email(text)}
+            onChangeText={text => setUse_email(text.toLowerCase())}
           />
           <TextInput
             style={styles.input}

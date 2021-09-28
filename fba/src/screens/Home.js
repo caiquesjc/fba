@@ -7,12 +7,13 @@ import ButtonCategories from "../components/ButtonCategories"
 import ButtonCourse from "../components/ButtonCourse"
 
 import api from "../services/api"
-
+import { useAuth } from "../contexts/auth"
 
 
 export default function Home({ navigation }) {
     const [loading, setLoading ] = useState(true)
     const [data, setData ] = useState()
+    const [state, setState] = useAuth()
     const categories = [{name: "Categoria 1"},{name: "Categoria 2"},{name: "Categoria 3"}]
 
     const [refresh, setRefresh] = useState(false)

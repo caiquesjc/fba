@@ -58,10 +58,22 @@ const Connection = require("./Conenction")
     })
   }
 
+  const getUserByEmail = (email) => {
+    return new Promise(function(resolve, reject) {
+      Connection.query(`SELECT * FROM "user" WHERE use_email=${email}`, (error, results) => {
+        if (results)
+          resolve(results.rows[0])
+        reject({sucess: false, error: error})
+        
+      })
+    })
+  }
+
   module.exports = {
       registerUser,
       listUser,
       updateUser,
       deletUser,
-      getUser
+      getUser,
+      getUserByEmail
   }

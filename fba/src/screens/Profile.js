@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from "react-native"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useAuth } from "../contexts/auth";
 
@@ -8,6 +9,18 @@ const minhaFoto = "https://avatars.githubusercontent.com/u/54915913?v=4"
 
 export default function Profile() {
     const [state, setState] = useAuth()
+
+    let user = {
+        use_age: "null",
+        use_email: "null",
+        use_name: "null",
+        use_password: "null",
+        use_photo: "null",
+        use_telephone: "null"
+    } 
+    if(state)
+        user = state.user  
+
     return (
         <View style={styles.conatiner}>
             <View style={styles.containerImage}>
@@ -15,11 +28,11 @@ export default function Profile() {
             </View>
 
             <View style={styles.containerInf}> 
-                <Text style={styles.text}>Nome: Caique Nascimento</Text>
-                <Text style={styles.text}>Idade: 20</Text>
-                <Text style={styles.text}>Email: caiquemiguelde@gmail.com</Text>
-                <Text style={styles.text}>Senha: ******</Text>
-                <Text style={styles.text}>Outra Info</Text>
+                <Text style={styles.text}>Nome: {user.use_name}</Text>
+                <Text style={styles.text}>Idade: {user.use_age}</Text>
+                <Text style={styles.text}>Email: {user.use_email}</Text>
+                <Text style={styles.text}>Senha: {user.use_password}</Text>
+                <Text style={styles.text}>Outra </Text>
             </View>
 
             <View style={styles.containerLogout}>

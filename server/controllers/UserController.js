@@ -72,4 +72,15 @@ router.get("/get", (req, res) => {
       })
 })
 
+router.get("/get-by-email", (req, res) => {
+  const use_email = req.body.use_email
+    UserModel.getUser(use_email)
+    .then(response => {
+        res.status(200).send(response);
+      })
+      .catch(error => {
+        res.status(500).send(error);
+      })
+})
+
 module.exports = router
