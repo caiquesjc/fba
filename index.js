@@ -25,7 +25,7 @@ app.use((req, res) => {
   res.redirect("/")
 })
 
-app.listen(port, () => {
-    console.log(`App rodando em: http://localhost:${PORT}`)
+app.listen(PORT, () => {
+    console.log(`app launching in port${PORT}`)
   })
 
