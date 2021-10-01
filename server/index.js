@@ -2,11 +2,11 @@ require('dotenv').config()
 const express = require('express')
 const cors = require("cors")
 const app = express()
-const port = 4002
 const cookieParser = require("cookie-parser")
 
 const {authenticate} = require("./services/AuthService")
 
+const PORT = process.env.PORT || 4002
 
 app.use(express.json())
 app.use(cors({credentials: true, origin: "*"}))
@@ -25,7 +25,7 @@ app.use((req, res) => {
   res.redirect("/")
 })
 
-app.listen(port, () => {
-    console.log(`App rodando em: http://localhost:${port}`)
+app.listen(PORT, () => {
+    console.log(`app launching in port${PORT}`)
   })
 

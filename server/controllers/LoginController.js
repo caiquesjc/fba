@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
     return res.status(200).send({ success: true, user, token: AuthService.generateToken(user, res) })
 
   } catch (error) {
-    return res.status(500).send({success: false, error: "an error occurred while processing the request",})
+    return res.status(500).send({success: false, error: "an error occurred while processing the request", erro: error})
   }
 });
 
