@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, FlatList } from "react-native"
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, FlatList, Dimensions, SafeAreaView } from "react-native"
 
 import VideoCustom from "../components/Video"
 import Loading from "../components/Loading"
@@ -34,6 +34,7 @@ export default function CoursePresentation({ route, navigation }) {
     if(loading)
     return <Loading/>
     return (
+        <SafeAreaView style={styles.container}>
         <View style={styles.container}>
             <View style={styles.video}> 
                 <VideoCustom/>
@@ -77,6 +78,7 @@ export default function CoursePresentation({ route, navigation }) {
             /> : <View style={{width: "90%", alignItems: "center", justifyContent: "center", flex: 1}}><Text style={{fontSize: 24,color: "#aaa"}}>Este curso não possui aulas</Text></View>}
             
         </View>
+        </SafeAreaView>
     )
 }
 
@@ -86,10 +88,11 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         paddingBottom: 10,
-        backgroundColor: "#212121"
+        backgroundColor: "#212121",
+        width: "100%"
     },
     video: {
-        width: 400,
+        width: Dimensions.get("window").width,
         height: 250,
         margin: 10,
     },

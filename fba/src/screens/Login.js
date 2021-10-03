@@ -9,6 +9,8 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
+  Image,
+  Dimensions
 } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -16,6 +18,10 @@ import { Icon } from "react-native-elements"
 
 import { useAuth } from "../contexts/auth"
 import api from "../services/api";
+
+const logoFba = require("../../assets/logo.png")
+
+import { fbaColors } from "../assets/colors"
 
 export default function Login() {
   const [use_email, setUse_email] = useState("")
@@ -77,6 +83,11 @@ const getDataLocal = async () => {
     <SafeAreaView style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
+          <View style={styles.containerImage}>
+            <Image source={logoFba} style={styles.image}/>
+          </View>
+
+          <View style={styles.containerInfs}>
         <Text style={styles.text}>
             Insira seu e-mail e senha para continuar
           </Text>
@@ -106,7 +117,7 @@ const getDataLocal = async () => {
               {/*<Text style={styles.text}>
                 Mostrar senha
             </Text>*/}
-              <Icon name={passIcon} type="material" color="#aaa"/>
+              <Icon name={passIcon} type="material" color={fbaColors.DarkGray}/>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonPass} activeOpacity={0.9}>
               <Text style={styles.text}>Esqueci a senha</Text>
@@ -116,6 +127,7 @@ const getDataLocal = async () => {
           <TouchableOpacity style={styles.button} activeOpacity={0.4} onPress={() => handleSignIn()}>
             <Text style={styles.text}>Login</Text>
           </TouchableOpacity>
+          </View>
         </View>
       </TouchableWithoutFeedback>
     </SafeAreaView>
@@ -125,26 +137,38 @@ const getDataLocal = async () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#212121",
+    backgroundColor: fbaColors.Nero,
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%"
+  },
+  containerImage: {
+    marginBottom: 50
+  },
+  image: {
+    width: Dimensions.get("window").width * 0.400,
+    height: Dimensions.get("window").height * 0.120,
+  },
+  containerInfs: {
     alignItems: "center",
     justifyContent: "center",
     width: "100%"
   },
   text: {
-    color: "#aaa",
+    color: fbaColors.DarkGray,
     fontWeight: "bold"
   },
   input: {
     width: "70%",
-    color: "#212121",
+    color: fbaColors.Nero,
     borderWidth: 1,
     marginTop: 20,
-    borderColor: "#aaa",
+    borderColor: fbaColors.DarkGray,
     borderRadius: 20,
     padding: 10,
     textAlign: "center",
     fontSize: 18,
-    backgroundColor: "#aaa"
+    backgroundColor: fbaColors.DarkGray
   },
   buttonPassCont: {
     width: "70%",
@@ -158,7 +182,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderWidth: 1,
-    borderColor: "#aaa",
+    borderColor: fbaColors.DarkGray,
     width: "50%",
     padding: 10,
     marginTop: 20,

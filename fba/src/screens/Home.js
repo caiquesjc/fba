@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Text, View, StyleSheet, ScrollView, SafeAreaView, Alert, FlatList } from "react-native"
+import * as ScreenOrientation from 'expo-screen-orientation'
 
 import Loading from "../components/Loading"
 
@@ -14,9 +15,19 @@ export default function Home({ navigation }) {
     const [loading, setLoading ] = useState(true)
     const [data, setData ] = useState()
     const [state, setState] = useAuth()
+    const [categorySelected, setCategorySelected ] = useState()
     const categories = [{name: "Categoria 1"},{name: "Categoria 2"},{name: "Categoria 3"}]
 
     const [refresh, setRefresh] = useState(false)
+
+
+   // ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.DEFAULT)
+
+    function handleSelectCategory(category) {
+        setCategorySelected(category)
+
+        navigation.navigate("TestVideo")
+    }
 
     function getCourses() {
         return (
@@ -62,6 +73,8 @@ export default function Home({ navigation }) {
                         <ButtonCategories
                             title={item.name}
                             navigation={navigation}
+                            onPress={() => handleSelectCategory(item.name)}
+                            active={categorySelected === item.name}
                         />
                     )}
                     keyExtractor={(item, index) => index.toString()}
