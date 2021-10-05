@@ -1,5 +1,5 @@
 import * as ScreenOrientation from "expo-screen-orientation";
-import { Dimensions, BackHandler } from "react-native";
+import { Dimensions, BackHandler, View } from "react-native";
 import { Video } from "expo-av";
 import React, { useEffect, useRef } from "react";
 import VideoPlayer from "expo-video-player";
@@ -7,7 +7,7 @@ import VideoPlayer from "expo-video-player";
 export default function VideoPage({ videoUrl, navigation }) {
   const refVideo = useRef(null);
 
-  ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_LEFT);
+  ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT);
 
   const backAction = async () => {
     navigation.goBack();
@@ -21,6 +21,7 @@ export default function VideoPage({ videoUrl, navigation }) {
       BackHandler.removeEventListener("hardwareBackPress", backAction);
   }, []);
   return (
+    <View style={{flex: 1, backgroundCOlor: "blue"}}>
     <VideoPlayer
       videoProps={{
         shouldPlay: false,
@@ -32,8 +33,8 @@ export default function VideoPage({ videoUrl, navigation }) {
       }}
       style={{
         videoBackgroundColor: "black",
-        height: Dimensions.get("window").width,
-        width: Dimensions.get("window").height,
+        height: Dimensions.get("screen").width,
+        width: Dimensions.get("screen").height,
         flex: 1,
       }}
       fullscreen={{
@@ -46,5 +47,6 @@ export default function VideoPage({ videoUrl, navigation }) {
         },
       }}
     />
+    </View>
   );
 }
