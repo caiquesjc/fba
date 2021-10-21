@@ -41,6 +41,7 @@ export default function MyTabs() {
           },
         }}
       />
+
     </Tab.Navigator>
   );
 }

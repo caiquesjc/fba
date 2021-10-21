@@ -4,11 +4,11 @@ import { useAuth } from "../contexts/auth";
 
 import MyTabs from "./tab";
 
-import VideoCustom from "../components/Video";
 import CoursePresentation from "../screens/CoursePresentation";
 import Class from "../screens/Class";
 import Login from "../screens/Login";
 import VideoPage from "../screens/VideoPage";
+
 
 const Stack = createStackNavigator();
 
@@ -19,7 +19,7 @@ export default function StackCustom() {
     return (
       <Stack.Navigator>
         <Stack.Screen
-          name="Login"
+          name="Login1"
           component={Login}
           options={{ headerShown: false }}
         />
@@ -36,12 +36,6 @@ export default function StackCustom() {
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen
           options={{ headerShown: false }}
-          name="Video"
-          component={VideoCustom}
-        />
-
-        <Stack.Screen
-          options={{ headerShown: false }}
           name="CoursePresentation"
           component={CoursePresentation}
         />
@@ -54,7 +48,7 @@ export default function StackCustom() {
 
         <Stack.Screen
           options={{ headerShown: false }}
-          name="TestVideo"
+          name="VideoPage"
           component={VideoPage}
         />
       </Stack.Group>

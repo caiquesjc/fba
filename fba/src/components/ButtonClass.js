@@ -13,7 +13,7 @@ export default function ButtonClass({ classInf, navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.playBtn}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("VideoPage", { classInf })}>
         <Icon name="play-circle-filled" type="material"/>
         </TouchableOpacity>
       </View>
@@ -41,7 +41,7 @@ export default function ButtonClass({ classInf, navigation }) {
             margin: 10,
           }}
         >
-          <Text>Alguma info que nao sei ainda</Text>
+          <Text style={{maxWidth: "80%"}} numberOfLines={2}>{classInf.cla_description}</Text>
           <Text style={{ fontWeight: "bold" }}>Básico</Text>
         </View>
       </TouchableOpacity>

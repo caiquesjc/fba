@@ -1,14 +1,14 @@
+import React, {useEffect} from "react";
 import * as ScreenOrientation from "expo-screen-orientation";
-import { Dimensions, BackHandler, View } from "react-native";
-import { Video } from "expo-av";
-import React, { useEffect, useRef } from "react";
-import VideoPlayer from "expo-video-player";
+import { View, BackHandler, Dimensions } from "react-native";
+import YoutubePlayer from "react-native-youtube-iframe";
 
-export default function VideoPage({ videoUrl, navigation }) {
-  const refVideo = useRef(null);
-
-  ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT);
-
+export default function VideoPage({ navigation, route, videoId }) {
+  const { classInf } = route.params;
+  console.log(classInf)
+  ScreenOrientation.lockAsync(
+    ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT
+  );
   const backAction = async () => {
     navigation.goBack();
     ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.DEFAULT);
@@ -20,33 +20,15 @@ export default function VideoPage({ videoUrl, navigation }) {
     return () =>
       BackHandler.removeEventListener("hardwareBackPress", backAction);
   }, []);
+
+
   return (
-    <View style={{flex: 1, backgroundCOlor: "blue"}}>
-    <VideoPlayer
-      videoProps={{
-        shouldPlay: false,
-        resizeMode: Video.RESIZE_MODE_CONTAIN,
-        source: {
-          uri: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-        },
-        ref: refVideo,
-      }}
-      style={{
-        videoBackgroundColor: "black",
-        height: Dimensions.get("screen").width,
-        width: Dimensions.get("screen").height,
-        flex: 1,
-      }}
-      fullscreen={{
-        inFullscreen: true,
-        exitFullscreen: async () => {
-          navigation.goBack();
-          await ScreenOrientation.lockAsync(
-            ScreenOrientation.OrientationLock.DEFAULT
-          );
-        },
-      }}
-    />
+    <View style={{ flex: 1 }}>
+      <YoutubePlayer
+        height={Dimensions.get("screen").height}
+        videoId={classInf.cla_video}
+      />
     </View>
   );
 }
+

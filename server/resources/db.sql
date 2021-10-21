@@ -1,6 +1,5 @@
-DROP TABLE IF EXISTS "user";
-DROP TABLE IF EXISTS "course";
-DROP TABLE IF EXISTS "class"; 
+drop schema if exists public cascade;
+create schema if not exists public;
 
 
 CREATE TABLE "user" (
@@ -22,34 +21,36 @@ CREATE TABLE course(
     cou_id SERIAL PRIMARY KEY,
     cou_name VARCHAR(255) NOT NULL,
     cou_duration VARCHAR(30) NOT NULL,
-    cou_description VARCHAR(500) NOT NULL
+    cou_description VARCHAR(500) NOT NULL,
+    cou_video VARCHAR(250) NOT NULL
 );
 
 INSERT INTO "course"(
-	cou_name, cou_duration, cou_description)
-	VALUES ('Nome Do Curso', 48, 'Descrção de um curso qualquer');
+	cou_name, cou_duration, cou_video, cou_description)
+	VALUES ('Nome Do Curso', 48, 'Descrção de um curso qualquer', 'wY4xqCjVZ-M');
 
 CREATE TABLE "class"(
     cla_id SERIAL PRIMARY KEY,
     cla_name VARCHAR(255) NOT NULL,
     cla_duration VARCHAR(30) NOT NULL,
     cla_description VARCHAR(500) NOT NULL,
+    cla_video VARCHAR(250) NOT NULL,
     fk_cou_id INT NOT NULL,
     FOREIGN KEY (fk_cou_id) REFERENCES course(cou_id) ON DELETE CASCADE
 
 );
 
 INSERT INTO class(
-	cla_name, cla_duration, cla_description, fk_cou_id)
-	VALUES ('Aula 1', '50', 'Descrição qualquer de uma aula', 1);
+	cla_name, cla_duration, cla_description, cla_video, fk_cou_id)
+	VALUES ('Aula 1', '50', 'Descrição qualquer de uma aula', 'wY4xqCjVZ-M',1);
 
 INSERT INTO class(
-	cla_name, cla_duration, cla_description, fk_cou_id)
-	VALUES ('Aula 2', '50', 'Descrição qualquer de uma aula', 1);
+	cla_name, cla_duration, cla_description, cla_video, fk_cou_id)
+	VALUES ('Aula 2', '50', 'Descrição qualquer de uma aula', 'wY4xqCjVZ-M',1);
 
 INSERT INTO class(
-	cla_name, cla_duration, cla_description, fk_cou_id)
-	VALUES ('Aula 3', '50', 'Descrição qualquer de uma aula', 1);
+	cla_name, cla_duration, cla_description, cla_video, fk_cou_id)
+	VALUES ('Aula 3', '50', 'Descrição qualquer de uma aula', 'wY4xqCjVZ-M',1);
 
 /*funcao valida senha*/
 

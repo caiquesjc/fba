@@ -24,7 +24,7 @@ export default function ButtonCourse({
             margin: 10,
           }}
         >
-          <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+          <Text style={{ fontSize: 18, fontWeight: "bold", maxWidth: "50%"}} numberOfLines={1}>
             {courseInf.cou_name}
           </Text>
           <Text>Tempo do Curso: {courseInf.cou_duration}hr</Text>
@@ -36,7 +36,7 @@ export default function ButtonCourse({
             margin: 10,
           }}
         >
-          <Text>{courseInf.cou_description}</Text>
+          <Text style={{maxWidth: "70%"}} numberOfLines={2}>{courseInf.cou_description}</Text>
           <Text style={{ fontWeight: "bold" }}>Básico</Text>
         </View>
       </TouchableOpacity>
