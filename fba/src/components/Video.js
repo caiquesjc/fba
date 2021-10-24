@@ -8,7 +8,8 @@ export default function Video({ videoId }) {
     <View style={{flex: 1}}>
       <YoutubePlayer
         height={300}
-        videoId={videoId ? videoId : "iee2TATGMyI"}
+        //videoId={videoId ? videoId : "JeAo0LhGy80"}
+        videoId={videoId}
       />
     </View>
   );

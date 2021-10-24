@@ -13,7 +13,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { useAuth } from "../contexts/auth";
 
-const minhaFoto = "https://avatars.githubusercontent.com/u/54915913?v=4";
+const minhaFoto = "https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png";
 
 export default function Profile() {
   const [state, setState] = useAuth();

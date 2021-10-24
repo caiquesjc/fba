@@ -1,11 +1,10 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import * as ScreenOrientation from "expo-screen-orientation";
-import { View, BackHandler, Dimensions } from "react-native";
+import { View, BackHandler, Dimensions, Text, Button } from "react-native";
 import YoutubePlayer from "react-native-youtube-iframe";
 
 export default function VideoPage({ navigation, route, videoId }) {
   const { classInf } = route.params;
-  console.log(classInf)
   ScreenOrientation.lockAsync(
     ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT
   );
@@ -21,14 +20,21 @@ export default function VideoPage({ navigation, route, videoId }) {
       BackHandler.removeEventListener("hardwareBackPress", backAction);
   }, []);
 
-
-  return (
-    <View style={{ flex: 1 }}>
-      <YoutubePlayer
-        height={Dimensions.get("screen").height}
-        videoId={classInf.cla_video}
-      />
-    </View>
-  );
+  if (!classInf.cla_video) {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "#212121" }}>
+        <Text style={{fontSize: 22, color: "#aaaaaa", marginBottom: 20}}>Houve um problema ao reproduzir o vídeo!</Text>
+        <Button title="Voltar" color="#aaaaaa" onPress={() => backAction()}/>
+      </View>
+    );
+  } else {
+    return (
+      <View style={{ flex: 1 }}>
+        <YoutubePlayer
+          height={Dimensions.get("screen").height}
+          videoId={classInf.cla_video}
+        />
+      </View>
+    );
+  }
 }
-
