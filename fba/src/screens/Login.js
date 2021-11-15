@@ -13,6 +13,7 @@ import {
   Dimensions
 } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 
 import { Icon } from "react-native-elements"
 
@@ -30,26 +31,6 @@ export default function Login() {
   const [passVisible, setPassVisible] = useState(true)
   const [passIcon, setPassIcon] = useState("visibility-off")
 
-  const storeDataLocal = async (value) => {
-    try {
-      const jsonValue = JSON.stringify(value)
-      await AsyncStorage.setItem('@auth', jsonValue)
-    } catch (e) {
-      // saving error
-    }
-  }
-
-  
-const getDataLocal = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem('@auth')
-      console.log(jsonValue)
-      return jsonValue != null ? JSON.parse(jsonValue) : null;
-    } catch(e) {
-      // error reading value
-    }
-  }
-
 
 
   function handleSignIn() {
@@ -62,7 +43,7 @@ const getDataLocal = async () => {
       if(!res.data.success)
         Alert.alert("Email ou senha incorretos!")
       setState(res.data)
-      storeDataLocal(state)
+      saveLogin("fbaLogin", JSON.stringify(res.data))
     })
     .catch(err => console.log(err))
   }
@@ -72,12 +53,21 @@ const getDataLocal = async () => {
     passIcon == "visibility-off" ? setPassIcon("visibility") : setPassIcon("visibility-off")
   }
 
-  useEffect(() => {
-    () => {
-      if(getDataLocal() != null)
-      setState(getDataLocal())
+  async function saveLogin(key, value) {
+    await SecureStore.setItemAsync(key, value);
+  }
+
+  async function getLoginSaved() {
+    let result = await SecureStore.getItemAsync("fbaLogin")
+    if (result) {
+      setState(JSON.parse(result))
     }
-  })
+  }
+
+
+  useEffect(() => {
+    getLoginSaved()
+  },[])
 
   return (
     <SafeAreaView style={styles.container}>

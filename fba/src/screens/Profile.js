@@ -6,14 +6,14 @@ import {
   StyleSheet,
   Image,
   Dimensions,
-  TouchableOpacity
-  
+  TouchableOpacity,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStore from 'expo-secure-store';
 
 import { useAuth } from "../contexts/auth";
 
-const minhaFoto = "https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png";
+const minhaFoto =
+  "https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png";
 
 export default function Profile() {
   const [state, setState] = useAuth();
@@ -27,6 +27,10 @@ export default function Profile() {
     use_telephone: "null",
   };
   if (state) user = state.user;
+
+  async function deleteLogin(key) {
+    await SecureStore.deleteItemAsync(key);
+  }
 
   return (
     <View style={styles.conatiner}>
@@ -45,7 +49,10 @@ export default function Profile() {
       <View style={styles.containerLogout}>
         <TouchableOpacity
           style={styles.buttonLogout}
-          onPress={() => setState(false)}
+          onPress={() => {
+            setState(false);
+            deleteLogin("fbaLogin");
+          }}
         >
           <Text style={{ color: "#212121", fontSize: 24 }}>Sair</Text>
         </TouchableOpacity>
