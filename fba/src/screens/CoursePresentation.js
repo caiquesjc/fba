@@ -18,18 +18,26 @@ import ButtonClass from "../components/ButtonClass";
 export default function CoursePresentation({ route, navigation }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [finished, setFinished] = useState([]);
   const { courseInf } = route.params;
 
   function getClass() {
-    return useEffect(() => {
-      api.get(`/class/class-by-course/${courseInf.cou_id}`).then((res) => {
-        setData(res.data.data);
-        setLoading(false);
-      });
-    }, []);
+    api.get(`/class/class-by-course/${courseInf.cou_id}`).then((res) => {
+      setData(res.data.data);
+      setLoading(false);
+    });
   }
 
-  getClass();
+  function getClassFinished() {
+    const body = { fk_cou_id: courseInf.cou_id };
+    api.post("/class-finished/get", body).then((res) => {
+      setFinished(res.data.data);
+    });
+  }
+  useEffect(() => {
+    getClass();
+    getClassFinished();
+  }, []);
 
   if (loading) return <Loading />;
   return (
@@ -69,7 +77,7 @@ export default function CoursePresentation({ route, navigation }) {
             data.map(function (item, index) {
               return (
                 <View style={{ width: "90%" }} key={index}>
-                  <ButtonClass classInf={item} navigation={navigation} />
+                  <ButtonClass classInf={item} navigation={navigation} finished={finished}/>
                 </View>
               );
             })

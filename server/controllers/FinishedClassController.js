@@ -5,6 +5,7 @@ const FinishedClassModel = require("../database/FinishedClassModel")
 router.post("/register", (req, res) => {
     try {
         const newClassFinished = req.body
+        newClassFinished.fk_use_id = req.user.use_id
         FinishedClassModel.registerFinishedClass(newClassFinished)
         .then(response => {
             res.status(200).send(response);
@@ -20,6 +21,7 @@ router.post("/register", (req, res) => {
   router.post("/get", (req, res) => {
     try {
         const classFinished = req.body
+        classFinished.fk_use_id = req.user.use_id
         FinishedClassModel.listFinishedClass(classFinished)
         .then(response => {
             res.status(200).send(response);
