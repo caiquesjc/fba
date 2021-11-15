@@ -3,12 +3,11 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity,
   ScrollView,
-  FlatList,
   Dimensions,
   SafeAreaView,
 } from "react-native";
+import * as ScreenOrientation from "expo-screen-orientation";
 
 import Loading from "../components/Loading";
 import Video from "../components/Video";
@@ -17,11 +16,8 @@ import api from "../services/api";
 
 import ButtonClass from "../components/ButtonClass";
 export default function CoursePresentation({ route, navigation }) {
-  const [sizeDescription, setSizeDescription] = useState(80);
-  const [txtBtnDesc, setTxtBtnDesc] = useState("Ver mais");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-
   const { courseInf } = route.params;
 
   function getClass() {

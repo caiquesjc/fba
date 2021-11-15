@@ -37,7 +37,7 @@ export default function ButtonCourse({
           }}
         >
           <Text style={{maxWidth: "70%"}} numberOfLines={2}>{courseInf.cou_description}</Text>
-          <Text style={{ fontWeight: "bold" }}>Básico</Text>
+          <Text style={{ fontWeight: "bold" }}>{courseInf.cou_level}</Text>
         </View>
       </TouchableOpacity>
     </View>
