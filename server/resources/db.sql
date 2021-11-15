@@ -9,12 +9,13 @@ CREATE TABLE "user" (
     use_email VARCHAR(50) NOT NULL UNIQUE,
     use_telephone VARCHAR(15) NOT NULL,
     use_password VARCHAR(64) NOT NULL,
-    use_photo VARCHAR(255)
+    use_photo VARCHAR(255),
+    use_nickname VARCHAR(255)
 );
 
 INSERT INTO "user"(
-	use_name, use_age, use_email, use_telephone, use_password)
-	VALUES ('Caique Miguel', 20, 'caique@email.com', '12988888888', '123456');
+	use_name, use_age, use_email, use_telephone, use_password, use_nickname)
+	VALUES ('Caique Silverio', 20, 'caique@email.com', '12988888888', 'caique', 'caiquesjc');
 
 
 CREATE TABLE course(
@@ -54,23 +55,23 @@ INSERT INTO class(
 
 /*funcao valida senha*/
 
-CREATE OR REPLACE FUNCTION check_password(fun_use_email TEXT, fun_use_pass TEXT)
+CREATE OR REPLACE FUNCTION check_password(fun_use_email_or_nick TEXT, fun_use_pass TEXT)
 RETURNS BOOLEAN AS $$
 DECLARE passed BOOLEAN;
 BEGIN
         SELECT (use_password = $2) INTO passed
         FROM    "user"
-        WHERE   use_email = $1;
+        WHERE   use_email = $1 OR use_nickname = $1;
 
         RETURN passed;
 END;
 $$  LANGUAGE plpgsql;
 
 
-create or replace function get_user_id_by_email(fun_use_email varchar)
+create or replace function get_user_id_by_email(fun_use_email_or_nick varchar)
 returns bigint as $$
 begin
-	return (select use_id from "user" where use_email = fun_use_email limit 1);
+	return (select use_id from "user" where use_email = fun_use_email_or_nick or use_nickname = fun_use_email_or_nick limit 1);
 end
 $$ language plpgsql;
 
