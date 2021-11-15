@@ -14,8 +14,8 @@ app.use(cookieParser())
 app.use("/login", require("./controllers/LoginController"))
 app.use("/user", authenticate, require("./controllers/UserController"))
 app.use("/course", authenticate, require("./controllers/CoursesController"))
-//app.use("/course", require("./controllers/CoursesController"))
-app.use("/class", require("./controllers/ClassController"))
+app.use("/class", authenticate, require("./controllers/ClassController"))
+app.use("/class-finished", authenticate, require("./controllers/FinishedClassController"))
 app.use("/auth", authenticate, require("./controllers/AuthController"))
 app.use("/", (req, res) => {res.send("inicio")})
 
@@ -26,6 +26,6 @@ app.use((req, res) => {
 })
 
 app.listen(PORT, () => {
-    console.log(`app launching in port${PORT}`)
+    console.log(`open port: ${PORT}`)
   })
 

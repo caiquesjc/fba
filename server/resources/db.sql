@@ -4,7 +4,7 @@ DROP SCHEMA IF EXISTS PUBLIC CASCADE;
 CREATE SCHEMA IF NOT EXISTS PUBLIC;
 
 
-CREATE TABLE "user" (use_id INT GENERATED ALWAYS AS IDENTITY
+CREATE TABLE "user" (use_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY
                        (INCREMENT 1 START 1000 MINVALUE 1 MAXVALUE 2147483647 CACHE 1), use_name VARCHAR(100) NOT NULL,
                                                                                                               use_age INT NOT NULL,
                                                                                                                           use_email VARCHAR(50) NOT NULL UNIQUE,
@@ -55,6 +55,17 @@ CREATE TABLE "class"
                                                                                                 cla_video VARCHAR(250) NOT NULL,
                                                                                                                        fk_cou_id INT NOT NULL,
    FOREIGN KEY (fk_cou_id) REFERENCES course(cou_id) ON DELETE CASCADE);
+
+
+CREATE TABLE "finished_class"
+  (fk_cou_id INT NOT NULL,
+   FOREIGN KEY (fk_cou_id) REFERENCES course(cou_id) ON DELETE CASCADE,
+
+                                                               fk_cla_id INT NOT NULL,
+   FOREIGN KEY (fk_cla_id) REFERENCES "class"(cla_id) ON DELETE CASCADE,
+   
+                                                                fk_use_id INT NOT NULL,
+   FOREIGN KEY (fk_use_id) REFERENCES "user"(use_id) ON DELETE CASCADE);
 
 
 INSERT INTO class(cla_name, cla_duration, cla_description, cla_video, fk_cou_id)
