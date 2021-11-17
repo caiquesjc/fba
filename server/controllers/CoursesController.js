@@ -1,5 +1,6 @@
 const router = require("express").Router()
 const CourseModel = require("../database/CourseModel")
+const Conn = require("../database/Conenction")
 
 
 router.post("/register", (req, res) => {
@@ -74,5 +75,54 @@ router.delete("/delete", (req, res) => {
 }
 })
 
+// router.post("/my-courses", (req, res) => {
+//   const {cou_id} = req.body
+//   try {
+//         new Promise( function(resolve, reject){
+//           Conn.query(`select count(*) from finished_class f inner join`+
+//           ` course c on f.fk_cou_id = ${cou_id} and c.cou_id = ${cou_id} and fk_use_id = ${req.user.use_id}`,
+//            (error, results) => {
+//             resolve(res.send({success: true, data: results.rows[0]}))
+//             reject({success: false, data: error})
+//            })
+//         })
+//   } catch (error) {
+//     res.send({ sucess: false, error: "an error occurred during processing" });
+//   }
+// });
+
+router.get("/my-courses-quantity", (req, res) => {
+  try {
+        new Promise( function(resolve, reject){
+          Conn.query(`select distinct fk_cou_id from finished_class where fk_use_id = ${req.user.use_id}`,
+
+           (error, results) => {
+            resolve(res.send({success: true, data: results.rows}))
+            reject({success: false, data: error})
+           })
+        })
+  } catch (error) {
+    res.send({ sucess: false, error: "an error occurred during processing" });
+  }
+});
+
+router.post("/my-courses", (req, res) => {
+  const {id_courses} = req.body
+  try {
+        new Promise( function(resolve, reject){
+          Conn.query(`select * from course c where c.cou_id in ${id_courses}`,
+           (error, results) => {
+             if(!results) {
+              resolve(res.send({success: true, data: results}))
+             } else {
+            resolve(res.send({success: true, data: results.rows}))
+            reject({success: false, data: error})
+             }
+           })
+        })
+  } catch (error) {
+    res.send({ sucess: false, error: "an error occurred during processing" });
+  }
+});
 
 module.exports = router

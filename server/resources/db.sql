@@ -11,7 +11,7 @@ CREATE TABLE "user" (use_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY
                                                                                                                                                          use_telephone VARCHAR(15) NOT NULL,
                                                                                                                                                                                    use_password VARCHAR(64) NOT NULL,
                                                                                                                                                                                                             use_photo VARCHAR(255),
-                                                                                                                                                                                                                      use_nickname VARCHAR(255));
+                                                                                                                                                                                                                      use_nickname VARCHAR(255) UNIQUE);
 
 
 INSERT INTO "user"(use_name,

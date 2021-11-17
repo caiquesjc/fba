@@ -13,4 +13,4 @@ web-build/
 # macOS
 .DS_Store
 fba/yarn.lock
-fba/package-lock.json
+server/package-lock.json
