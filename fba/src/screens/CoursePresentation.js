@@ -15,10 +15,12 @@ import Video from "../components/Video";
 import api from "../services/api";
 
 import ButtonClass from "../components/ButtonClass";
+import { fbaColors } from "../assets/colors";
 export default function CoursePresentation({ route, navigation }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [finished, setFinished] = useState([]);
+  const [percent, setPercent] = useState(0);
   const { courseInf } = route.params;
 
   function getClass() {
@@ -29,8 +31,10 @@ export default function CoursePresentation({ route, navigation }) {
   }
 
   function getClassFinished() {
+    setPercent(0);
     const body = { fk_cou_id: courseInf.cou_id };
     api.post("/class-finished/get", body).then((res) => {
+      //setPercent((res.data.data.length * 100) / data.length)
       setFinished(res.data.data);
     });
   }
@@ -38,7 +42,6 @@ export default function CoursePresentation({ route, navigation }) {
     getClass();
     getClassFinished();
   }, []);
-
   if (loading) return <Loading />;
   return (
     <SafeAreaView style={styles.container}>
@@ -68,7 +71,25 @@ export default function CoursePresentation({ route, navigation }) {
               {courseInf.cou_description}
             </Text>
           </View>
-
+          {finished.length ? (
+            <View style={{ width: "90%", borderColor: fbaColors.DarkGray}}>
+              <Text
+                style={{ fontSize: 24, color: fbaColors.DarkGray, padding: 10, textAlign: "center" }}
+              >
+                Você concluiu {Math.ceil((finished.length * 100) / data.length)}
+                % deste curso
+              </Text>
+              <View
+                style={{
+                  backgroundColor: fbaColors.DeepSkyBlue,
+                  width: `${Math.ceil((finished.length * 100) / data.length)}%`,
+                  height: 10
+                }}
+              ></View>
+            </View>
+          ) : (
+            <></>
+          )}
           <Text style={{ fontSize: 24, padding: 10, color: "#aaa" }}>
             Aulas
           </Text>
@@ -77,7 +98,11 @@ export default function CoursePresentation({ route, navigation }) {
             data.map(function (item, index) {
               return (
                 <View style={{ width: "90%" }} key={index}>
-                  <ButtonClass classInf={item} navigation={navigation} finished={finished}/>
+                  <ButtonClass
+                    classInf={item}
+                    navigation={navigation}
+                    finished={finished}
+                  />
                 </View>
               );
             })

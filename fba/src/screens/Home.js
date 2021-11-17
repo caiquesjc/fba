@@ -47,7 +47,7 @@ export default function Home({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <View style={{ height: "20%" }}>
+        {/* <View style={{ height: "20%" }}>
           <Text
             style={{
               fontSize: 24,
@@ -72,7 +72,7 @@ export default function Home({ navigation }) {
             )}
             keyExtractor={(item, index) => index.toString()}
           />
-        </View>
+        </View> */}
 
         <View style={{ height: "auto" }}>
           <Text
