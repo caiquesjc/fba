@@ -12,7 +12,6 @@ import {
   Image,
   Dimensions
 } from "react-native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as SecureStore from 'expo-secure-store';
 
 import { Icon } from "react-native-elements"
@@ -23,6 +22,7 @@ import api from "../services/api";
 const logoFba = require("../../assets/logo.png")
 
 import { fbaColors } from "../assets/colors"
+import Loading from "../components/Loading"
 
 export default function Login() {
   const [use_email, setUse_email] = useState("")
@@ -30,10 +30,12 @@ export default function Login() {
   const [state, setState] = useAuth()
   const [passVisible, setPassVisible] = useState(true)
   const [passIcon, setPassIcon] = useState("visibility-off")
+  const [loading, setLoading] = useState("")
 
 
 
   function handleSignIn() {
+    setLoading("Carregando...")
     const user = {
       use_email,
       use_password
@@ -42,10 +44,13 @@ export default function Login() {
     .then(res => {
       if(!res.data.success)
         Alert.alert("Email ou senha incorretos!")
+        setLoading("")
       setState(res.data)
       saveLogin("fbaLogin", JSON.stringify(res.data))
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      setLoading("")
+      Alert.alert("Erro ao tentar fazer login!")})
   }
 
   function showPass() {
@@ -117,6 +122,7 @@ export default function Login() {
           <TouchableOpacity style={styles.button} activeOpacity={0.4} onPress={() => handleSignIn()}>
             <Text style={styles.text}>Login</Text>
           </TouchableOpacity>
+          <Text style={styles.text}>{loading}</Text>
           </View>
         </View>
       </TouchableWithoutFeedback>

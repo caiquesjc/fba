@@ -17,7 +17,6 @@ export default function MyCourses({ navigation }) {
   function getCourses() {
     setLoading(true);
     api.get("/course/my-courses-quantity").then((res) => {
-      console.log(res.data.data);
       setTfin(res.data.data.length);
       res.data.data.forEach(function (item) {
         listCou.push(item.fk_cou_id);
