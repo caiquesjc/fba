@@ -42,8 +42,8 @@ export default function Profile() {
         <Text style={styles.text}>Nome: {user.use_name}</Text>
         <Text style={styles.text}>Idade: {user.use_age}</Text>
         <Text style={styles.text}>Email: {user.use_email}</Text>
-        <Text style={styles.text}>Senha: {user.use_password}</Text>
-        <Text style={styles.text}>Outra </Text>
+        {/* <Text style={styles.text}>Senha: {user.use_password}</Text> */}
+        {/* <Text style={styles.text}>Outra </Text> */}
       </View>
 
       <View style={styles.containerLogout}>

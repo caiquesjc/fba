@@ -50,9 +50,9 @@ export default function CoursePresentation({ route, navigation }) {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.container}>
-          <View style={styles.video}>
+          {/* <View style={styles.video}>
             <Video videoId={courseInf.cou_video} />
-          </View>
+          </View> */}
           <Text style={{ fontSize: 24, padding: 10, color: "#aaa" }}>
             {courseInf.cou_name}
           </Text>
