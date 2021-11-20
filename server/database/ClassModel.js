@@ -3,9 +3,9 @@ const Connection = require("./Conenction")
 
 const registerClass = (body) => {
   return new Promise(function(resolve, reject) {
-    const { cla_name, cla_duration, cla_description, fk_cou_id } = body
-    Connection.query(`INSERT INTO "class" (cla_name, cla_duration, cla_description, fk_cou_id) VALUES ($1, $2, $3, $4) RETURNING *`,
-    [cla_name, cla_duration, cla_description, fk_cou_id], (error, results) => {
+    const { cla_name, cla_duration, cla_description, fk_cou_id, cla_video } = body
+    Connection.query(`INSERT INTO "class" (cla_name, cla_duration, cla_description, fk_cou_id, cla_video) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+    [cla_name, cla_duration, cla_description, fk_cou_id, cla_video], (error, results) => {
       if (results) 
         resolve(`Class created: ${results.rows}`)
       reject(error)
@@ -37,9 +37,9 @@ const registerClass = (body) => {
 //$1, $2, 3$, 4$, 5$
   const updateClass = (body) => {
     return new Promise(function(resolve, reject) {
-      const {cla_id, cla_name, cla_duration, cla_description, fk_cou_id} = body
-      Connection.query('UPDATE "class" SET cla_name=$1, cla_duration=$2, cla_description=$3, fk_cou_id=$4 WHERE cla_id=$5 RETURNING *', 
-      [cla_name, cla_duration, cla_description, fk_cou_id, cla_id], (error, results) => {
+      const {cla_id, cla_name, cla_duration, cla_description, fk_cou_id, cla_video} = body
+      Connection.query('UPDATE "class" SET cla_name=$1, cla_duration=$2, cla_description=$3, fk_cou_id=$4, cla_video=$6 WHERE cla_id=$5 RETURNING *', 
+      [cla_name, cla_duration, cla_description, fk_cou_id, cla_id, cla_video], (error, results) => {
         if (results) 
           resolve(`Class updated: ${results.rows[0]}`)
         reject(error)
