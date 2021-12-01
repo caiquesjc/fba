@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, StyleSheet, SafeAreaView, FlatList } from "react-native";
+import * as SecureStore from "expo-secure-store";
 
 import Loading from "../components/Loading";
 
@@ -12,6 +13,7 @@ import { useAuth } from "../contexts/auth";
 export default function Home({ navigation }) {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState();
+  const [user, setUser] = useAuth();
   const [categorySelected, setCategorySelected] = useState();
   const categories = [
     { name: "Categoria 1" },
@@ -38,8 +40,25 @@ export default function Home({ navigation }) {
     setRefresh(true);
     getCourses();
   }
+  async function deleteLogin(key) {
+    await SecureStore.deleteItemAsync(key);
+  }
+
+  function logOff() {
+    setUser(false);
+    deleteLogin("fbaLogin");
+  }
+
+  function verifyLogged() {
+    api.get("/auth").then((res) => {
+      if (!res.data.success) {
+        logOff();
+      }
+    });
+  }
 
   useEffect(() => {
+    verifyLogged();
     getCourses();
   }, []);
 

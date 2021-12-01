@@ -7,8 +7,7 @@ import { fbaColors } from "../assets/colors";
 const Tab = createBottomTabNavigator();
 
 import Home from "../screens/Home";
-import Profile from "../screens/Profile";
-import MyCourses from "../screens/MyCourses";
+import MyArea from "../screens/MyArea";
 
 export default function MyTabs() {
   return (
@@ -32,23 +31,10 @@ export default function MyTabs() {
         }}
       />
       <Tab.Screen
-        name="MyCourses"
-        component={MyCourses}
+        name="MyArea"
+        component={MyArea}
         options={{
-          title: "Meus Cursos",
-          headerShown: false,
-          tabBarIcon: () => {
-            return (
-              <Icon name="class" type="material" color={fbaColors.DarkGray} />
-            );
-          },
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          title: "Perfil",
+          title: "Minha Area",
           headerShown: false,
           tabBarIcon: () => {
             return (

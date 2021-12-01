@@ -8,7 +8,8 @@ import CoursePresentation from "../screens/CoursePresentation";
 import Class from "../screens/Class";
 import Login from "../screens/Login";
 import VideoPage from "../screens/VideoPage";
-
+import MyCourses from "../screens/MyCourses";
+import Profile from "../screens/Profile";
 
 const Stack = createStackNavigator();
 
@@ -50,6 +51,16 @@ export default function StackCustom() {
           options={{ headerShown: false }}
           name="VideoPage"
           component={VideoPage}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="MyCourses"
+          component={MyCourses}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Profile"
+          component={Profile}
         />
       </Stack.Group>
     </Stack.Navigator>
