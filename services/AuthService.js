@@ -18,7 +18,7 @@ const AuthService = module.exports = {
     },
     generateToken: function(user, res) {
         const token = jwt.sign(user, AuthService.secretKey, {expiresIn: AuthService.expiresIn})
-        res.cookie(AuthService.cookieName, token, {httpOnly: true, maxAge: AuthService.expiresIn * 1000, sameSite: "none", secure: true})
+        res.cookie(AuthService.cookieName, token, {httpOnly: false, maxAge: AuthService.expiresIn * 1000, sameSite: "none", secure: true})
         return token
     }
 
