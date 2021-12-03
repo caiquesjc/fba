@@ -1,9 +1,10 @@
 const router = require("express").Router()
 const CourseModel = require("../database/CourseModel")
 const Conn = require("../database/Conenction")
+const {verifyAdmin} = require("../services/AuthService")
 
 
-router.post("/register", (req, res) => {
+router.post("/register", verifyAdmin, (req, res) => {
   try {
       const newCourse = req.body
       CourseModel.registerCourse(newCourse)
@@ -44,7 +45,7 @@ router.get("/get/:cou_id", (req, res) => {
 })
 
 
-router.put("/update", (req, res) => {
+router.put("/update", verifyAdmin, (req, res) => {
   try {
     const course = req.body
     CourseModel.updateCourse(course)
@@ -60,7 +61,7 @@ router.put("/update", (req, res) => {
 })
 
 
-router.delete("/delete", (req, res) => {
+router.delete("/delete", verifyAdmin, (req, res) => {
   try {
     const cou_id = req.body.cou_id
     CourseModel.deletCourse(cou_id)

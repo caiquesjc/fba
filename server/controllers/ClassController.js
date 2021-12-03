@@ -1,8 +1,9 @@
 const router = require("express").Router()
 const ClassModel = require("../database/ClassModel")
+const {verifyAdmin} = require("../services/AuthService")
 
 
-router.post("/register", (req, res) => {
+router.post("/register", verifyAdmin, (req, res) => {
   try {
       const newClass = req.body
       ClassModel.registerClass(newClass)
@@ -47,7 +48,7 @@ router.get("/get/:cla_id", (req, res) => {
 })
 
 
-router.put("/update", (req, res) => {
+router.put("/update", verifyAdmin, (req, res) => {
   try {
     const classEdited = req.body
     ClassModel.updateClass(classEdited)
@@ -63,7 +64,7 @@ router.put("/update", (req, res) => {
 })
 
 
-router.delete("/delete", (req, res) => {
+router.delete("/delete", verifyAdmin, (req, res) => {
   try {
     const cla_id = req.body.cla_id
     ClassModel.deletClass(cla_id)
