@@ -3,7 +3,6 @@ const {promisify} = require("util")
 
 const AuthService = module.exports = {
 
-    expiresIn: 86400,
     cookieName: "jwtoken",
     secretKey: "144ace4a691b66bdc2d8b674ce3a0237051464b9ca57e8457a47306dbea9d0fb",
 
@@ -18,7 +17,7 @@ const AuthService = module.exports = {
     },
     generateToken: function(user, res) {
         const token = jwt.sign(user, AuthService.secretKey, {expiresIn: AuthService.expiresIn})
-        res.cookie(AuthService.cookieName, token, {httpOnly: false, maxAge: AuthService.expiresIn * 1000, sameSite: "none", secure: true})
+        res.cookie(AuthService.cookieName, token, {expires  : new Date(Date.now() + (31557600 * 1000)), httpOnly : false})
         return token
     }
 
