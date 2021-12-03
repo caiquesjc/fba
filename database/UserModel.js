@@ -68,7 +68,7 @@ const deletUser = (id) => {
 const getUser = (id) => {
   return new Promise(function (resolve, reject) {
     Connection.query(
-      `SELECT use_id, use_name, use_age, use_email, use_telephone, use_photo, use_nickname FROM "user" WHERE use_id=${id}`,
+      `SELECT use_id, use_name, use_age, use_email, use_telephone, use_photo, use_nickname, use_is_admin FROM "user" WHERE use_id=${id}`,
       (error, results) => {
         if (results) resolve(results.rows[0]);
         reject({ sucess: false, error: error });
