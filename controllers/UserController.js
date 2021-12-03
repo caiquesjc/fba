@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const UserModel = require("../database/UserModel");
+const {verifyAdmin} = require("../services/AuthService")
 
-router.post("/register", (req, res) => {
+router.post("/register", verifyAdmin, (req, res) => {
     try {
         const newUser = req.body
         UserModel.registerUser(newUser)
@@ -16,7 +17,7 @@ router.post("/register", (req, res) => {
     }
 })
 
-router.get("/list", (req, res) => {
+router.get("/list", verifyAdmin, (req, res) => {
   try {
     UserModel.listUser()
   .then(response => {
@@ -30,7 +31,7 @@ router.get("/list", (req, res) => {
 }
 })
 
-router.put("/update", (req, res) => {
+router.put("/update", verifyAdmin, (req, res) => {
   try {
     const user = req.body
     UserModel.updateUser(user)
@@ -46,7 +47,7 @@ router.put("/update", (req, res) => {
 })
 
 
-router.delete("/delete", (req, res) => {
+router.delete("/delete", verifyAdmin, (req, res) => {
   try {
     const use_id = req.body.use_id
     UserModel.deletUser(use_id)
