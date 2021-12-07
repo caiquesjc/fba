@@ -1,34 +1,39 @@
-DROP TABLE finished_class;DROP TABLE "class";DROP TABLE course;DROP TABLE USER;CREATE TABLE "user"
+DROP TABLE finished_class;
+DROP TABLE "class";
+DROP TABLE course;
+DROP TABLE "user";
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+CREATE TABLE "user"
              (
                           use_id        INT PRIMARY KEY generated always AS identity (INCREMENT 1 START 1000 MINVALUE 1 MAXVALUE 2147483647 CACHE 1),
                           use_name      VARCHAR(100) NOT NULL,
                           use_age       INT NOT NULL,
                           use_email     VARCHAR(50) NOT NULL UNIQUE,
                           use_telephone VARCHAR(15) NOT NULL,
-                          use_password  VARCHAR(64) NOT NULL,
+                          use_password  VARCHAR NOT NULL,
                           use_photo     VARCHAR(255),
                           use_nickname  VARCHAR(255) UNIQUE,
                           use_is_admin  BOOLEAN
-             );INSERT INTO "user"
-            (
-                        use_name,
-                        use_age,
-                        use_email,
-                        use_telephone,
-                        use_password,
-                        use_nickname,
-                        use_is_admin
-            )
-            VALUES
-            (
-                        'Caique Silverio',
-                        20,
-                        'caique@email.com',
-                        '12988888888',
-                        'caique',
-                        'caiquesjc',
-                        TRUE
-            );CREATE TABLE course
+              );INSERT INTO "user"
+              (
+                          use_name,
+                          use_age,
+                          use_email,
+                          use_telephone,
+                          use_password,
+                          use_nickname,
+                          use_is_admin
+              )
+              VALUES
+              (
+                          'Caique Silverio',
+                          20,
+                          'caique@email.com',
+                          '12988888888',
+                          PGP_SYM_ENCRYPT('caique','AES_KEY'),
+                          'caiquesjc',
+                          TRUE
+              );CREATE TABLE course
              (
                           cou_id SERIAL PRIMARY KEY,
                           cou_name        VARCHAR(255) NOT NULL,
@@ -128,7 +133,7 @@ CREATE OR replace FUNCTION check_password(fun_use_email_or_nick TEXT,
               DECLARE
                 passed BOOLEAN;
               BEGIN
-                SELECT (use_password = $2)
+                SELECT (PGP_SYM_DECRYPT(use_password::bytea, 'AES_KEY') = $2)
                 INTO   passed
                 FROM   "user"
                 WHERE  use_email = $1
@@ -137,7 +142,9 @@ CREATE OR replace FUNCTION check_password(fun_use_email_or_nick TEXT,
                 RETURN passed;
               END;
               $$ LANGUAGE plpgsql;
-              CREATE OR replaceFUNCTION get_user_id_by_email(fun_use_email_or_nick VARCHAR) returns bigint
+
+
+              CREATE OR replace FUNCTION get_user_id_by_email(fun_use_email_or_nick VARCHAR) returns bigint
               AS
                 $$
               BEGIN
