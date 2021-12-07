@@ -12,7 +12,7 @@ const registerUser = (body) => {
       use_nickname
     } = body;
     Connection.query(
-      `INSERT INTO "user" (use_name, use_age, use_email, use_telephone, PGP_SYM_ENCRYPT(use_password,'AES_KEY'), use_is_admin, use_nickname) VALUES ($1, $2, $3, $4, PGP_SYM_ENCRYPT($5,'AES_KEY'), $6, $7) RETURNING *`,
+      `INSERT INTO "user" (use_name, use_age, use_email, use_telephone, use_password, use_is_admin, use_nickname) VALUES ($1, $2, $3, $4, PGP_SYM_ENCRYPT($5,'AES_KEY'), $6, $7) RETURNING *`,
       [use_name, use_age, use_email, use_telephone, use_password, use_is_admin, use_nickname],
       (error, results) => {
         if (results) resolve(`User created: ${results.rows}`);
