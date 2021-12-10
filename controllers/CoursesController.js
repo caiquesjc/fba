@@ -1,6 +1,6 @@
 const router = require("express").Router()
 const CourseModel = require("../database/CourseModel")
-const Conn = require("../database/Conenction")
+const Conn = require("../database/Connection")
 const {verifyAdmin} = require("../services/AuthService")
 
 

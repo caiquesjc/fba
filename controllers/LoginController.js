@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Connection = require("../database/Conenction");
+const Connection = require("../database/Connection");
 const AuthService = require("../services/AuthService");
 const UserModel = require("../database/UserModel");
 

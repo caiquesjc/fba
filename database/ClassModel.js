@@ -1,4 +1,4 @@
-const Connection = require("./Conenction")
+const Connection = require("./Connection")
 
 
 const registerClass = (body) => {
