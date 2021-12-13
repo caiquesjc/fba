@@ -1,37 +1,38 @@
-const router = require("express").Router()
-const FinishedClassModel = require("../database/FinishedClassModel")
+const router = require("express").Router();
+const FinishedClassModel = require("../database/FinishedClassModel");
+const FinishedClassService = require("../services/FinishedClassService");
 
+router.post("/register", async (req, res) => {
+  try {
+    const newClassFinished = req.body;
+    newClassFinished.fk_use_id = req.user.use_id;
+    await FinishedClassService.registerFinishedClass(newClassFinished);
+    return res.send({ success: true });
+  } catch (error) {
+    console.log(error);
+    return res.send({ success: false, error: error.detail });
+  }
+});
 
-router.post("/register", (req, res) => {
-    try {
-        const newClassFinished = req.body
-        newClassFinished.fk_use_id = req.user.use_id
-        FinishedClassModel.registerFinishedClass(newClassFinished)
-        .then(response => {
-            res.status(200).send(response);
-          })
-          .catch(error => {
-            res.status(500).send(error);
-          })
-    } catch (error) {
-        res.send({success: false, error: "an error occurred during processing"})
-    }
-  })
+router.post("/get", async (req, res) => {
+  try {
+    const classFinished = req.body;
+    classFinished.fk_use_id = req.user.use_id;
+    const finished = await FinishedClassService.getFinishedClass(classFinished);
+    return res.send({ success: true, finished });
+  } catch (error) {
+    return res.send({ success: false, error: error.detail });
+  }
+});
 
-  router.post("/get", (req, res) => {
-    try {
-        const classFinished = req.body
-        classFinished.fk_use_id = req.user.use_id
-        FinishedClassModel.listFinishedClass(classFinished)
-        .then(response => {
-            res.status(200).send(response);
-          })
-          .catch(error => {
-            res.status(500).send(error);
-          })
-    } catch (error) {
-        res.send({success: false, error: "an error occurred during processing"})
-    }
-  })
+router.delete("/delete", async (req, res) => {
+  try {
+    const finId = req.body.finId;
+    await FinishedClassService.deleteFinishedClass(finId);
+    return res.send({ success: true });
+  } catch (error) {
+    return res.send({ success: false, error: error.detail });
+  }
+});
 
-  module.exports = router
+module.exports = router;
