@@ -1,0 +1,700 @@
+{
+	"info": {
+		"_postman_id": "b02abd27-eb3b-4d5e-a57a-5adcceed2ecb",
+		"name": "Trabalho de Graduação",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "UserController",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"use_name\": \"leitao silverio\",\r\n    \"use_age\": \"20\",\r\n    \"use_email\": \"leitaosds1@email.com\",\r\n    \"use_telephone\": \"585545885487\",\r\n    \"use_password\": \"leitao\",\r\n    \"use_nicdskname\": \"leitao\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/user/register",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"use_id\": 1000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/user/list",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"user",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"use_id\": 1000,\r\n    \"use_name\": \"Caique Silverio\",\r\n    \"use_email\": \"caique@email.com\",\r\n    \"use_nickname\": \"caiquesjc\",\r\n    \"use_telephone\": \"12988888888\",\r\n    \"use_password\": \"cai\",\r\n    \"use_age\": 20,\r\n    \"use_is_admin\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/user/update",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"user",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"use_id\" : \"1014\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/user/delete",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"user",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getuser",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"use_id\" : \"1000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/user/get",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"user",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-by-email",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"use_email\": \"caique@email.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/user/get-by-email",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"user",
+								"get-by-email"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CourseController",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cou_name\": \"Curso Teste 2\",\r\n    \"cou_duration\": \"2\",\r\n    \"cou_description\": \"Aqui deveria ir uma descrição\",\r\n    \"cou_video\": \"45\",\r\n    \"cou_level\": \"intermediário\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/course/register",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"course",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/course/list",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"course",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cou_id\": \"3\",\r\n    \"cou_name\": \"Nota Fiscal\",\r\n    \"cou_duration\": \"1\",\r\n    \"cou_description\": \"Lorem ipsum mais uns baratos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/course/update",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"course",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cou_id\" : 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/course/delete",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"course",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/course/get/2",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"course",
+								"get",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "my courses quant",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"use_id\": 1000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/course/my-courses-quantity",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"course",
+								"my-courses-quantity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "my courses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idCourses\": \"(1,2)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/course/my-courses",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"course",
+								"my-courses"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ClassController",
+			"item": [
+				{
+					"name": "register class",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cla_name\": \"teste\",\r\n    \"cla_duration\": \"2\",\r\n    \"cla_description\": \"aqui é uma descricao\",\r\n    \"fk_cou_id\": \"1\",\r\n    \"cla_video\": \"sghhds\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/class/register",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"class",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list class",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/class/list",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"class",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update class",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cla_id\": \"6\",\r\n    \"cla_name\": \"aaaa\",\r\n    \"cla_duration\": \"aaaaaa\",\r\n    \"cla_description\": \"aaaaa\",\r\n    \"cla_video\": \"jggffgygh\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/class/update",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"class",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete class",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"claId\": 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/class/delete",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"class",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get class",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{local}}/class/get/1",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"class",
+								"get",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "class by cou id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/class/class-by-course/1",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"class",
+								"class-by-course",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FinishedClassController",
+			"item": [
+				{
+					"name": "reg classfini",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fk_cou_id\": \"1\",\r\n    \"fk_cla_id\": \"3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/class-finished/register",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"class-finished",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delet finished",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"finId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/class-finished/delete",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"class-finished",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get class fin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fk_cou_id\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/class-finished/get",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"class-finished",
+								"get"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "auth",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{local}}/auth",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"use_email\": \"caiquesjc\",\r\n    \"use_password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/login",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"use_email\": \"caiquesjc\",\r\n    \"use_password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/login/admin",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"login",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "local",
+			"value": "http://192.168.100.6:4002"
+		}
+	]
+}
