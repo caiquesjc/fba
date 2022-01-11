@@ -12,7 +12,7 @@ export default function Class({ route, navigation }) {
       </View>
 
       <ScrollView style={{ backgroundColor: "#212121", width: "90%" }}>
-        <Text style={{ fontSize: 24, padding: 10, color: "#aaa" }}>
+        <Text style={{ fontSize: 24, padding: 10, color: "#fff" }}>
           {classInf.cla_name}
         </Text>
         <View style={{ height: "auto", backgroundColor: "#212121" }}>
@@ -22,7 +22,7 @@ export default function Class({ route, navigation }) {
               fontSize: 16,
               padding: 5,
               marginBottom: 10,
-              color: "#aaa",
+              color: "#fff",
             }}
           >
             {classInf.cla_description}

@@ -13,7 +13,7 @@ export default function MyArea({ navigation }) {
         <Icon
           name="account-circle"
           type="material"
-          color={fbaColors.DarkGray}
+          color="#fff"
           style={styles.icon}
         />
         <Text style={styles.text}>Meu Perfil</Text>
@@ -26,7 +26,7 @@ export default function MyArea({ navigation }) {
         <Icon
           name="class"
           type="material"
-          color={fbaColors.DarkGray}
+          color="#fff"
           style={styles.icon}
         />
         <Text style={styles.text}>Meus Cursos</Text>
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     borderWidth: 2,
-    borderColor: "#aaa",
+    borderColor: "#fff",
     borderRadius: 20,
     marginTop: 15,
     width: "90%",
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 25,
-    color: fbaColors.DarkGray,
+    color: "#fff",
     fontWeight: "bold",
   },
 });

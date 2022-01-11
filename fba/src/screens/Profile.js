@@ -34,9 +34,9 @@ export default function Profile() {
 
   return (
     <View style={styles.conatiner}>
-      <TouchableOpacity style={styles.containerImage}>
+      {/* <TouchableOpacity style={styles.containerImage}>
         <Image source={{ uri: minhaFoto }} style={styles.image} />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <View style={styles.containerInf}>
         <Text style={styles.text}>Nome: {user.use_name}</Text>
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").width * 0.5,
     borderRadius: 100,
     borderWidth: 5,
-    borderColor: "#aaa",
+    borderColor: "#fff",
   },
   containerInf: {
     height: "auto",
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    color: "#aaa",
+    color: "#fff",
     padding: 10,
   },
   containerLogout: {

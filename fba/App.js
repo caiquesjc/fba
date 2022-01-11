@@ -1,5 +1,6 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
 
 import StackCustom from "./src/routes/stack";
 
@@ -10,6 +11,7 @@ export default function App() {
     <NavigationContainer>
       <AuthProvider>
         <StackCustom />
+        <StatusBar style="auto" />
       </AuthProvider>
     </NavigationContainer>
   );

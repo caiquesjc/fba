@@ -16,7 +16,7 @@ router.post("/register", async (req, res) => {
 router.get("/list", async (req, res) => {
   try {
     const users = await UserService.getAllUsers();
-    return res.send({ success: true, users });
+    return res.send({ success: true, data: users });
   } catch (error) {
     return res.send({ success: false, error: error.detail });
   }
@@ -31,7 +31,7 @@ router.put("/update", async (req, res) => {
     return res.send({ success: true });
   } catch (error) {
     return res.send({
-      sucess: false,
+      success: false,
       error: error.detail,
     });
   }
@@ -44,7 +44,7 @@ router.delete("/delete", async (req, res) => {
     return res.send({ success: true });
   } catch (error) {
     return res.send({
-      sucess: false,
+      success: false,
       error: error.detail,
     });
   }
@@ -57,7 +57,7 @@ router.get("/get", async (req, res) => {
     return res.send({ success: true, user: user });
   } catch (error) {
     return res.send({
-      sucess: false,
+      success: false,
       error: error.detail,
     });
   }
@@ -70,7 +70,7 @@ router.get("/get-by-email", async (req, res) => {
     return res.send({ success: true, user: user });
   } catch (error) {
     return res.send({
-      sucess: false,
+      success: false,
       error: error.detail,
     });
   }

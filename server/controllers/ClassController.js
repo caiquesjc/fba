@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const ClassModel = require("../database/ClassModel");
 const ClassService = require("../services/ClassService");
 const { verifyAdmin } = require("../services/AuthService");
 
@@ -16,7 +15,7 @@ router.post("/register", async (req, res) => {
 router.get("/list", async (req, res) => {
   try {
     const classes = await ClassService.getAllClasses();
-    return res.send({ success: true, classes });
+    return res.send({ success: true, data: classes });
   } catch (error) {
     return res.send({ success: false, error: error.detail });
   }
@@ -48,7 +47,7 @@ router.get("/get/:claId", async(req, res) => {
   try {
     const claId = req.params.claId;
     const Class = await ClassService.getClass(claId)
-    return res.send({ success: true, class: Class });
+    return res.send({ success: true, data: Class });
   } catch (error) {
     return res.send({ success: false, error: error.detail });
   }
@@ -58,7 +57,7 @@ router.get("/class-by-course/:couId", async(req, res) => {
   try {
     const couID = req.params.couId;
     const classes = await ClassService.getClassByCourse(couID)
-    return res.send({ success: true, classes });
+    return res.send({ success: true, data: classes });
   } catch (error) {
     return res.send({ success: false, error: error.detail });
   }

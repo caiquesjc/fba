@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const FinishedClassModel = require("../database/FinishedClassModel");
 const FinishedClassService = require("../services/FinishedClassService");
 
 router.post("/register", async (req, res) => {
@@ -19,7 +18,7 @@ router.post("/get", async (req, res) => {
     const classFinished = req.body;
     classFinished.fk_use_id = req.user.use_id;
     const finished = await FinishedClassService.getFinishedClass(classFinished);
-    return res.send({ success: true, finished });
+    return res.send({ success: true, data: finished });
   } catch (error) {
     return res.send({ success: false, error: error.detail });
   }

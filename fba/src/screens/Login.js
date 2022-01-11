@@ -112,7 +112,7 @@ export default function Login() {
               {/*<Text style={styles.text}>
                 Mostrar senha
             </Text>*/}
-              <Icon name={passIcon} type="material" color={fbaColors.DarkGray}/>
+              <Icon name={passIcon} type="material" color="#fff"/>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonPass} activeOpacity={0.9}>
               <Text style={styles.text}>Esqueci a senha</Text>
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   text: {
-    color: fbaColors.DarkGray,
+    color: "#fff",
     fontWeight: "bold"
   },
   input: {
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderWidth: 1,
-    borderColor: fbaColors.DarkGray,
+    borderColor: "#fff",
     width: "50%",
     padding: 10,
     marginTop: 20,

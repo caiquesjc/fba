@@ -15,17 +15,8 @@ export default function Home({ navigation }) {
   const [data, setData] = useState();
   const [user, setUser] = useAuth();
   const [categorySelected, setCategorySelected] = useState();
-  const categories = [
-    { name: "Categoria 1" },
-    { name: "Categoria 2" },
-    { name: "Categoria 3" },
-  ];
 
   const [refresh, setRefresh] = useState(false);
-
-  function handleSelectCategory(category) {
-    setCategorySelected(category);
-  }
 
   function getCourses() {
     return api.get("/course/list").then((res) => {
@@ -66,32 +57,6 @@ export default function Home({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        {/* <View style={{ height: "20%" }}>
-          <Text
-            style={{
-              fontSize: 24,
-              margin: 10,
-              fontWeight: "bold",
-              color: "#fff",
-            }}
-          >
-            Categorias
-          </Text>
-          <FlatList
-            horizontal
-            data={categories}
-            showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => (
-              <ButtonCategories
-                title={item.name}
-                navigation={navigation}
-                onPress={() => handleSelectCategory(item.name)}
-                active={categorySelected === item.name}
-              />
-            )}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        </View> */}
 
         <View style={{ height: "auto" }}>
           <Text

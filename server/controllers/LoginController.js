@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const Connection = require("../database/Connection");
 const AuthService = require("../services/AuthService");
-const UserModel = require("../database/UserModel");
 const UserService = require("../services/UserService")
 
 router.post("/", async (req, res) => {
@@ -17,7 +16,6 @@ router.post("/", async (req, res) => {
 
     const use_id = (await conn.query("select get_user_id_by_email($1)", [use_email]))[0].get_user_id_by_email
     const user = (await UserService.getUser(use_id))[0]
-    console.log(user)
 
     return res.status(200).send({ success: true, user, token: AuthService.generateToken(user, res) })
 
@@ -40,7 +38,6 @@ router.post("/admin", async (req, res) => {
     const use_id = (await conn.query("select get_user_id_by_email($1)", [use_email]))[0].get_user_id_by_email
 
     const user = (await UserService.getUser(use_id))[0]
-    console.log(user)
     if (!user.use_is_admin){
       return res.status(500).send({success: false, error: "unauthorized"})
     }
