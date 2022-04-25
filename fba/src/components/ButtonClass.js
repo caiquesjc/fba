@@ -11,7 +11,7 @@ import { Icon } from "react-native-elements";
 import { fbaColors } from "../assets/colors";
 import api from "../services/api";
 
-export default function ButtonClass({ classInf, navigation, finished }) {
+export default function ButtonClass({ classInf, navigation, finished, setReload }) {
   let isFinished = finished.some((fin) => fin.fk_cla_id == classInf.cla_id);
   const [isFin, setIsFin] = useState(false);
   function addFinished() {
@@ -21,6 +21,7 @@ export default function ButtonClass({ classInf, navigation, finished }) {
         setIsFin(true);
       }
     });
+    setReload(true)
   }
   return (
     // <View style={styles.container}>

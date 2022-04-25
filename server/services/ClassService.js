@@ -33,8 +33,12 @@ module.exports = {
   getClassByCourse: async function (couId) {
     const RespositoryClass = await Repository.get(Repository.Class);
     const Classes = await RespositoryClass.find({
-      order: { cla_name: "ASC" },
-      fk_cou_id: couId,
+      where: {
+        fk_cou_id: couId
+      },
+      order: {
+        cla_name: "ASC"
+      }
     });
     return Classes;
   },

@@ -20,7 +20,7 @@ export default function CoursePresentation({ route, navigation }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [finished, setFinished] = useState([]);
-  const [percent, setPercent] = useState(0);
+  const [reload, setReload] = useState(false);
   const { courseInf } = route.params;
 
   function getClass() {
@@ -31,17 +31,21 @@ export default function CoursePresentation({ route, navigation }) {
   }
 
   function getClassFinished() {
-    setPercent(0);
     const body = { fk_cou_id: courseInf.cou_id };
     api.post("/class-finished/get", body).then((res) => {
       //setPercent((res.data.data.length * 100) / data.length)
       setFinished(res.data.data);
     });
+    setReload(false)
   }
   useEffect(() => {
     getClass();
     getClassFinished();
   }, []);
+  if (reload) {
+    getClass();
+    getClassFinished();
+  }
   if (loading) return <Loading />;
   return (
     <SafeAreaView style={styles.container}>
@@ -99,6 +103,7 @@ export default function CoursePresentation({ route, navigation }) {
                     classInf={item}
                     navigation={navigation}
                     finished={finished}
+                    setReload={setReload}
                   />
                 </View>
               );

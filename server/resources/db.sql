@@ -1,16 +1,15 @@
-DROP TABLE finished_class;
-DROP TABLE "class";
-DROP TABLE course;
-DROP TABLE "user";
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
+DROP TABLE IF EXISTS finished_class;
+DROP TABLE IF EXISTS "class";
+DROP TABLE IF EXISTS course;
+DROP TABLE IF EXISTS "user";
 CREATE TABLE "user" (
   use_id INT PRIMARY KEY generated always AS identity (
     INCREMENT 1 START 1000 MINVALUE 1 MAXVALUE 2147483647 CACHE 1
   ),
   use_name VARCHAR(100) NOT NULL,
-  use_age INT NOT NULL,
+  use_age INT,
   use_email VARCHAR(50) NOT NULL UNIQUE,
-  use_telephone VARCHAR(15) NOT NULL,
+  use_telephone VARCHAR(15),
   use_password VARCHAR NOT NULL,
   use_photo VARCHAR(255),
   use_nickname VARCHAR(255) UNIQUE NOT NULL,
@@ -32,7 +31,7 @@ VALUES
     20,
     'caique@email.com',
     '12988888888',
-    PGP_SYM_ENCRYPT('caique', 'AES_KEY'),
+    'caique',
     'caiquesjc',
     TRUE
   );CREATE TABLE course (
@@ -40,7 +39,7 @@ VALUES
     cou_name VARCHAR(255) NOT NULL,
     cou_duration VARCHAR(30) NOT NULL,
     cou_description VARCHAR NOT NULL,
-    cou_video VARCHAR(250) NOT NULL,
+    cou_video VARCHAR(250),
     cou_level VARCHAR(50) NOT NULL
   );
 INSERT INTO

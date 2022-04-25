@@ -50,9 +50,9 @@ router.delete("/delete", async (req, res) => {
   }
 });
 
-router.get("/get", async (req, res) => {
+router.get("/get/:use_id", async (req, res) => {
   try {
-    const useId = req.body.use_id;
+    const useId = req.params.use_id;
     const user = await UserService.getUser(useId);
     return res.send({ success: true, user: user });
   } catch (error) {
@@ -63,9 +63,9 @@ router.get("/get", async (req, res) => {
   }
 });
 
-router.get("/get-by-email", async (req, res) => {
+router.get("/get-by-email/:use_email", async (req, res) => {
   try {
-    const use_email = req.body.use_email;
+    const use_email = req.params.use_email;
     const user = await UserService.getUserByEmail(use_email);
     return res.send({ success: true, user: user });
   } catch (error) {
