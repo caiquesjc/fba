@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser")
 const {authenticate} = require("./services/AuthService")
 
 const PORT = process.env.PORT || 4002
-app.use(cors({credentials: true, origin: "https://fba-web.herokuapp.com"}))
+app.use(cors({credentials: true, origin: "http://192.168.100.6:3000"}))
 app.use(cookieParser())
 app.use(express.json())
 app.use("/login", require("./controllers/LoginController"))
