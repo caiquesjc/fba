@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text, FlatList } from "react-native";
+import { View, StyleSheet, Text, FlatList, Alert } from "react-native";
 import ButtonCourse from "../components/ButtonCourse";
 import api from "../services/api";
 import Loading from "../components/Loading";
@@ -17,16 +17,22 @@ export default function MyCourses({ navigation }) {
   function getCourses() {
     setLoading(true);
     api.get("/course/my-courses-quantity").then((res) => {
-      setTfin(res.data.data.length);
-      res.data.data.forEach(function (item) {
-        listCou.push(item.fk_cou_id);
-      });
-      let strReq = "(".concat(listCou).concat(")");
-      api.post("/course/my-courses", { id_courses: strReq }).then((res2) => {
-        setData(res2.data.data);
-        setLoading(false);
-        setRefresh(false);
-      });
+      if (res.data.success) {
+        setTfin(res.data.data.length);
+        res.data.data.forEach(function (item) {
+          listCou.push(item.fk_cou_id);
+        });
+        let strReq = "(".concat(listCou).concat(")");
+        api.post("/course/my-courses", { id_courses: strReq }).then((res2) => {
+          if (res.data.success) {
+            setData(res2.data.data);
+            setLoading(false);
+            setRefresh(false);
+          }
+        });
+      } else {
+        Alert.alert("Sem cursos!", "Você não iniciou nenhum curso!");
+      }
     });
   }
 
@@ -41,9 +47,11 @@ export default function MyCourses({ navigation }) {
   }, []);
   return (
     <View style={styles.container}>
-      {!data? (
+      {!data ? (
         <View>
-          <Text style={{color: "#fff", fontSize: 15}}>Você não iniciou nenhum curso!</Text>
+          <Text style={{ color: "#fff", fontSize: 15 }}>
+            Você não iniciou nenhum curso!
+          </Text>
         </View>
       ) : (
         <View>
