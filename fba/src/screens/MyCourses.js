@@ -43,12 +43,12 @@ export default function MyCourses({ navigation }) {
     <View style={styles.container}>
       {!data? (
         <View>
-          <Text style={{color: fbaColors.DarkGray}}>Você não iniciou nenhum curso!</Text>
+          <Text style={{color: "#fff", fontSize: 15}}>Você não iniciou nenhum curso!</Text>
         </View>
       ) : (
         <View>
           <Text>Meus Cursos</Text>
-          <Text style={{ color: fbaColors.DarkGray }}>Seus cursos: {Tfin}</Text>
+          <Text style={{ color: "#fff" }}>Seus cursos: {Tfin}</Text>
           <FlatList
             onRefresh={() => handleRefresh()}
             refreshing={refresh}

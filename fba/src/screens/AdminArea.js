@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Icon } from "react-native-elements";
 import { fbaColors } from "../assets/colors";
 
-export default function MyArea({ navigation }) {
+export default function AdminArea({ navigation }) {
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -30,6 +30,33 @@ export default function MyArea({ navigation }) {
           style={styles.icon}
         />
         <Text style={styles.text}>Meus Cursos</Text>
+      </TouchableOpacity>
+      <View style={{width: "90%", marginTop: 20}}>
+      <Text style={[styles.text, {padding: 10}]}>Funções administrativas</Text>
+      </View>
+      <TouchableOpacity
+        style={styles.buttonInf}
+        onPress={() => navigation.navigate("AdminCourses")}
+      >
+        <Icon
+          name="class"
+          type="material"
+          color="#fff"
+          style={styles.icon}
+        />
+        <Text style={styles.text}>Cursos</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.buttonInf}
+        onPress={() => navigation.navigate("Users")}
+      >
+        <Icon
+          name="class"
+          type="material"
+          color="#fff"
+          style={styles.icon}
+        />
+        <Text style={styles.text}>Usuários</Text>
       </TouchableOpacity>
     </View>
   );

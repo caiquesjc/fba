@@ -1,98 +1,66 @@
-const router = require("express").Router()
-const ClassModel = require("../database/ClassModel")
-const {verifyAdmin} = require("../services/AuthService")
+const router = require("express").Router();
+const ClassService = require("../services/ClassService");
+const { verifyAdmin } = require("../services/AuthService");
 
-
-router.post("/register", verifyAdmin, (req, res) => {
+router.post("/register", async (req, res) => {
   try {
-      const newClass = req.body
-      ClassModel.registerClass(newClass)
-      .then(response => {
-          res.status(200).send(response);
-        })
-        .catch(error => {
-          res.status(500).send(error);
-        })
+    const newClass = req.body;
+    await ClassService.registerClass(newClass);
+    return res.send({ success: true });
   } catch (error) {
-      res.send({sucess: false, error: "an error occurred during processing"})
+    return res.send({ success: false, error: error.detail });
   }
-})
+});
 
-router.get("/list", (req, res) => {
-    try {
-      ClassModel.listClass()
-    .then(response => {
-        res.status(200).send(response);
-      })
-      .catch(error => {
-        res.status(500).send(error);
-      })
-    } catch (error) {
-      res.send({sucess: false, error: "an error occurred during processing"})
-  }
-})
-
-router.get("/get/:cla_id", (req, res) => {
+router.get("/list", async (req, res) => {
   try {
-    const cla_id = req.params.cla_id
-  ClassModel.getClass(cla_id)
-  .then(response => {
-      res.status(200).send(response);
-    })
-    .catch(error => {
-      res.status(500).send(error);
-    })
-  }catch (error) {
-    res.send({sucess: false, error: "an error occurred during processing"})
-}
-})
-
-
-router.put("/update", verifyAdmin, (req, res) => {
-  try {
-    const classEdited = req.body
-    ClassModel.updateClass(classEdited)
-    .then(response => {
-        res.status(200).send(response);
-      })
-      .catch(error => {
-        res.status(500).send(error);
-      })
-} catch (error) {
-    res.send({sucess: false, error: "an error occurred during processing"})
-}
-})
-
-
-router.delete("/delete", verifyAdmin, (req, res) => {
-  try {
-    const cla_id = req.body.cla_id
-    ClassModel.deletClass(cla_id)
-    .then(response => {
-      res.status(200).send(response);
-    })
-    .catch(error => {
-      res.status(500).send(error);
-    })
-  }catch (error) {
-    res.send({sucess: false, error: "an error occurred during processing"})
-}
-})
-
-
-router.get("/class-by-course/:cou_id", (req, res) => {
-  try {
-    const cou_id = req.params.cou_id
-    ClassModel.classByCourseId(cou_id)
-  .then(response => {
-      res.status(200).send(response);
-    })
-    .catch(error => {
-      res.status(500).send(error);
-    })
+    const classes = await ClassService.getAllClasses();
+    return res.send({ success: true, data: classes });
   } catch (error) {
-    res.send({sucess: false, error: "an error occurred during processing"})
-}
-})
+    return res.send({ success: false, error: error.detail });
+  }
+});
 
-module.exports = router
+router.put("/update", async (req, res) => {
+  try {
+    const newClass = req.body;
+    const claId = newClass.cla_id;
+    delete newClass["cla_id"];
+    await ClassService.updateClass(claId, newClass);
+    return res.send({ success: true });
+  } catch (error) {
+    return res.send({ success: false, error: error.detail });
+  }
+});
+
+router.delete("/delete", async (req, res) => {
+  try {
+    const claId = req.body.claId;
+    await ClassService.deleteClass(claId);
+    return res.send({ success: true });
+  } catch (error) {
+    return res.send({ success: false, error: error.detail });
+  }
+});
+
+router.get("/get/:claId", async(req, res) => {
+  try {
+    const claId = req.params.claId;
+    const Class = await ClassService.getClass(claId)
+    return res.send({ success: true, data: Class });
+  } catch (error) {
+    return res.send({ success: false, error: error.detail });
+  }
+});
+
+router.get("/class-by-course/:couId", async(req, res) => {
+  try {
+    const couID = req.params.couId;
+    const classes = await ClassService.getClassByCourse(couID)
+    return res.send({ success: true, data: classes });
+  } catch (error) {
+    return res.send({ success: false, error: error.detail });
+  }
+});
+
+module.exports = router;
