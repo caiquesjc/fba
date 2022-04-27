@@ -31,7 +31,6 @@ router.post("/admin", async (req, res) => {
     const { use_email, use_password } = req.body;
 
     const validate = (await conn.query("select check_password($1, $2)", [use_email,use_password]))[0].check_password
-    console.log(validate)
     if (!validate)
       return res.status(200).send({ success: false, error: "incorrect username or password" })
 

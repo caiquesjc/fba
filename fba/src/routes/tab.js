@@ -13,7 +13,7 @@ import AdminArea from "../screens/AdminArea"
 
 export default function MyTabs() {
   const [user] = useAuth();
-  if (user.user.use_is_admin)
+  if (user && user.user.use_is_admin)
     return (
       <Tab.Navigator
         initialRouteName="Home"

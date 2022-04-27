@@ -44,11 +44,11 @@ export default function ButtonClassAdmin({
               .then((res) => {
                 if (res.data.success) {
                   setReload(true);
-                  Alert.alert("Sucesso!");
+                  Alert.alert("Sucesso!", "Aula deletada com sucesso!");
                 }
               })
               .catch((e) => {
-                Alert.alert("Erro!");
+                Alert.alert("Erro!", "Aula não deletada!");
               });
           },
         },

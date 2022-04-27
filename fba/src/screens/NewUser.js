@@ -15,6 +15,7 @@ import { Picker } from "@react-native-community/picker";
 import { Icon } from "react-native-elements";
 
 import api from "../services/api";
+import { validateEmail, validatePass } from "../services/validations";
 export default function NewUser({ setVisible, setRefresh }) {
   const [use_name, setUse_name] = useState("");
   const [use_email, setUse_email] = useState("");
@@ -26,7 +27,6 @@ export default function NewUser({ setVisible, setRefresh }) {
 
   const [passIcon, setPassIcon] = useState("visibility-off");
   const [passVisible, setPassVisible] = useState(true);
-
   function createUser() {
     if (
       !use_name ||
@@ -37,7 +37,11 @@ export default function NewUser({ setVisible, setRefresh }) {
       !use_nickname ||
       !use_is_admin
     ) {
-      Alert.alert("Preencha os campos vazios!");
+      Alert.alert("Erro!", "Preencha os campos vazios!");
+    } else if (!validateEmail(use_email)) {
+      Alert.alert("Erro!", "Email inválido!");
+    } else if (!validatePass(use_password)) {
+      Alert.alert("Erro!", "Senha inválida!");
     } else {
       api
         .post("user/register", {
@@ -54,9 +58,19 @@ export default function NewUser({ setVisible, setRefresh }) {
             Alert.alert(`Usuário ${use_name} cadastrado com sucesso!`);
             setRefresh(true);
             setVisible(false);
+          } else {
+            res.data.error.includes("use_nickname")
+              ? Alert.alert(
+                  "Erro!",
+                  "Erro ao cadastrar usuário\nNome de usuário já existe!"
+                )
+              : Alert.alert(
+                  "Erro!",
+                  "Erro ao cadastrar usuário\nEmail já está sendo utilizado!"
+                );
           }
         })
-        .catch((error) => Alert.alert(`Erro ao cadastrado o usuário!`));
+        .catch((error) => Alert.alert("Erro!", "Erro ao cadastrado o usuário!"));
     }
   }
   function showPass() {

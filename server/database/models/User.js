@@ -15,7 +15,8 @@ module.exports = new EntitySchema({
         },
         use_email: {
             type: "varchar",
-            nullable: false
+            nullable: false,
+            unique: true
         },
         use_telephone: {
             type: "varchar",
@@ -35,7 +36,8 @@ module.exports = new EntitySchema({
         },
         use_nickname: {
             type: "varchar",
-            nullable: false
+            nullable: false,
+            unique: true
         },
         use_is_admin: {
             type: "boolean",

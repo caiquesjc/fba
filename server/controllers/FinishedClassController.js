@@ -8,7 +8,6 @@ router.post("/register", async (req, res) => {
     await FinishedClassService.registerFinishedClass(newClassFinished);
     return res.send({ success: true });
   } catch (error) {
-    console.log(error);
     return res.send({ success: false, error: error.detail });
   }
 });

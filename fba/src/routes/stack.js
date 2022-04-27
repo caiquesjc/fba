@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useAuth } from "../contexts/auth";
+
+import * as SecureStore from "expo-secure-store";
+
+import api from "../services/api";
 
 import MyTabs from "./tab";
 
@@ -21,7 +25,28 @@ import User from "../screens/User";
 const Stack = createStackNavigator();
 
 export default function StackCustom() {
-  const [state] = useAuth();
+  const [state, setState] = useAuth();
+
+  async function deleteLogin(key) {
+    await SecureStore.deleteItemAsync(key);
+  }
+
+  function logOff() {
+    setState(false);
+    deleteLogin("fbaLogin");
+  }
+
+  function verifyLogged() {
+    api.get("/auth").then((res) => {
+      if (!res.data.success) {
+        logOff();
+      }
+    });
+  }
+
+  useEffect(() => {
+    verifyLogged();
+  }, []);
   if (!state || !state.success)
     return (
       <Stack.Navigator>
@@ -32,7 +57,7 @@ export default function StackCustom() {
         />
       </Stack.Navigator>
     );
-  else if ((state || state.success) && (!state.user.use_is_admin))
+  else if ((state || state.success) && !state.user.use_is_admin)
     return (
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
@@ -138,7 +163,7 @@ export default function StackCustom() {
           name="Users"
           component={Users}
         />
-         <Stack.Screen
+        <Stack.Screen
           options={{ headerShown: false }}
           name="User"
           component={User}

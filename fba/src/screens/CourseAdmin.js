@@ -58,12 +58,12 @@ export default function CourseAdmin({ route, navigation }) {
             api
               .delete("/course/delete", { data: { cou_id: courseInf.cou_id } })
               .then((res) => {
-                Alert.alert("Sucesso!");
+                Alert.alert("Sucesso!", "Curso deletado com sucesso!");
                 //navigation.goBack();
                 navigation.navigate("AdminCourses");
               })
               .catch((e) => {
-                Alert.alert("Erro!");
+                Alert.alert("Erro!","Curso não deletado!");
               });
           },
         },
@@ -139,7 +139,7 @@ export default function CourseAdmin({ route, navigation }) {
           </View>
           {finished.length ? (
             <View style={{ width: "90%", borderColor: fbaColors.DarkGray }}>
-              <Text style={styles.text} onPress={() => console.log("sdgsh")}>
+              <Text style={styles.text}>
                 Você concluiu {Math.ceil((finished.length * 100) / data.length)}
                 % deste curso
               </Text>

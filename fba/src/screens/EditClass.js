@@ -35,13 +35,13 @@ export default function EditClass({ classInf, setVisibleEdit, setReload }) {
         })
         .then((res) => {
           if (res.data.success) {
-            Alert.alert(`Aula ${cla_name} editada com sucesso!`);
+            Alert.alert("Sucesso!", `Aula ${cla_name} editada com sucesso!`);
             setReload(true);
             setVisibleEdit(false);
           }
         })
         .catch((error) => {
-          Alert.alert(`Erro ao editar a aula!`);
+          Alert.alert("Erro!", `Erro ao editar a aula!`);
         });
     }
   }

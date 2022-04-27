@@ -32,7 +32,7 @@ export default function EditCourse({ navigation, route }) {
       !cou_video ||
       !cou_level
     ) {
-      Alert.alert("Preencha os campos vazios!");
+      Alert.alert("Erro!", "Preencha os campos vazios!");
     } else {
       api
         .put("course/update", {
@@ -44,10 +44,10 @@ export default function EditCourse({ navigation, route }) {
           cou_level,
         })
         .then((res) => {
-          if (!res.data.success) Alert.alert(`Erro ao editar!`);
-          Alert.alert(`Curso ${cou_name} editado com sucesso!`);
+          if (!res.data.success) Alert.alert("Erro!", `Erro ao editar o curso!`);
+          Alert.alert("Sucesso!", `Curso ${cou_name} editado com sucesso!`);
         })
-        .catch((error) => Alert.alert(`Erro ao criar o curso!`));
+        .catch((error) => Alert.alert("Erro!", `Erro ao editar o curso!`));
     }
   }
   return (
@@ -60,7 +60,7 @@ export default function EditCourse({ navigation, route }) {
           justifyContent: "center",
           alignItems: "center",
           width: "100%",
-          minHeight: "100%"
+          minHeight: "100%",
         }}
         showsVerticalScrollIndicator={false}
       >

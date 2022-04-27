@@ -24,10 +24,10 @@ export default function ButtonCourseAdmin({ navigation, courseInf, setReload }) 
               .delete("/course/delete", { data: { cou_id: courseInf.cou_id } })
               .then((res) => {
                 setReload(true)
-                Alert.alert("Sucesso!");
+                Alert.alert("Sucesso!", "Curso deletado com sucesso!");
               })
               .catch((e) => {
-                Alert.alert("Erro!");
+                Alert.alert("Erro!","Curso não deletado!");
               });
           },
         },

@@ -13,7 +13,13 @@ import {
 import { fbaColors } from "../assets/colors";
 
 import api from "../services/api";
-export default function NewClass({ navigation, route, courseInf, setVisible, setReload }) {
+export default function NewClass({
+  navigation,
+  route,
+  courseInf,
+  setVisible,
+  setReload,
+}) {
   const [cla_name, setCla_name] = useState("");
   const [cla_duration, setCla_duration] = useState("");
   const [cla_description, setCla_description] = useState("");
@@ -22,7 +28,7 @@ export default function NewClass({ navigation, route, courseInf, setVisible, set
 
   function createClass() {
     if (!cla_name || !cla_duration || !cla_description || !cla_video) {
-      Alert.alert("Preencha os campos vazios!");
+      Alert.alert("Erro!", "Preencha os campos vazios!");
     } else {
       api
         .post("class/register", {
@@ -34,14 +40,13 @@ export default function NewClass({ navigation, route, courseInf, setVisible, set
         })
         .then((res) => {
           if (!res.data.success) {
-            Alert.alert(`Aula ${cla_name} não criada!`);
+            Alert.alert("Erro!", `Aula ${cla_name} não criada!`);
           }
-          Alert.alert(`Aula ${cla_name} criada com sucesso!`);
-          setReload(true)
-          setVisible(false)
-          
+          Alert.alert("Sucesso!", `Aula ${cla_name} criada com sucesso!`);
+          setReload(true);
+          setVisible(false);
         })
-        .catch((error) => Alert.alert(`Erro ao criar a aula!`));
+        .catch((error) => Alert.alert("Erro!", "Erro ao criar a aula!"));
     }
   }
   return (
