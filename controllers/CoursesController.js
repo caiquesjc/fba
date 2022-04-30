@@ -53,7 +53,7 @@ router.get("/get/:cou_id", async (req, res) => {
   }
 });
 
-router.get("/my-courses-quantity", async(req, res) => {
+router.get("/my-courses-quantity/:cou_id", async(req, res) => {
   try {
     const useId = req.body.use_id
     const courses = await CourseService.getMyCoursesQuantity(useId);
