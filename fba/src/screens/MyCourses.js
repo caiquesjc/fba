@@ -4,6 +4,7 @@ import ButtonCourse from "../components/ButtonCourse";
 import api from "../services/api";
 import Loading from "../components/Loading";
 import { fbaColors } from "../assets/colors";
+import { useAuth } from "../contexts/auth";
 
 export default function MyCourses({ navigation }) {
   const [data, setData] = useState([]);
@@ -13,18 +14,19 @@ export default function MyCourses({ navigation }) {
   const [data2, setData2] = useState([]);
   const [Tfin, setTfin] = useState([]);
   const [listCou, setListCou] = useState([]);
+  const [user, setUser] = useAuth();
 
   function getCourses() {
     setLoading(true);
-    api.get("/course/my-courses-quantity").then((res) => {
+    api.get(`/course/my-courses-quantity/${user.user.use_id}`).then((res) => {
       if (res.data.success) {
         setTfin(res.data.data.length);
         res.data.data.forEach(function (item) {
           listCou.push(item.fk_cou_id);
         });
         let strReq = "(".concat(listCou).concat(")");
-        api.post("/course/my-courses", { id_courses: strReq }).then((res2) => {
-          if (res.data.success) {
+        api.post("/course/my-courses", { idCourses: strReq }).then((res2) => {
+          if (res2.data.success) {
             setData(res2.data.data);
             setLoading(false);
             setRefresh(false);
