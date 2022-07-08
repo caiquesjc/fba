@@ -8,10 +8,9 @@ npm-debug.*
 *.orig.*
 *.env
 web-build/
-**.expo
+.expo/
 
 # macOS
 .DS_Store
-fba/yarn.lock
 **/package-lock.json
 teste.js
